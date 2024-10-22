@@ -5,6 +5,32 @@ typedef struct Unk {
     s16 unk_02;
 } Unk;
 
+typedef struct BoardStatus {
+    /* 0x00 */ s8 unk_00;
+    /* 0x01 */ s8 unk1;
+    /* 0x02 */ u8 unk2[2];
+    /* 0x04 */ s8 unk4[2];
+    /* 0x06 */ u8 unk_06;
+    /* 0x07 */ char pad7[1];
+    /* 0x08 */ s16 unk_08;
+    /* 0x0A */ char padA[2];
+    /* 0x0C */ s16 unk_0C;
+    /* 0x0E */ char padE[2];
+    /* 0x10 */ f32 xPos;
+    /* 0x14 */ f32 yPos;
+    /* 0x18 */ f32 unk_18;
+    /* 0x1C */ f32 unk_1C;
+    /* 0x20 */ f32 unk_20;
+    /* 0x24 */ f32 unk_24;
+    /* 0x28 */ f32 unk_28;
+    /* 0x2C */ f32 unk_2C;
+    /* 0x30 */ s32 unk30;                           /* inferred */
+    /* 0x34 */ char pad34[2];
+    /* 0x36 */ s16 unk_36;
+    /* 0x38 */ u8 unk_38[12];
+    /* 0x44 */ s16 unk_44[2];
+} BoardStatus;
+
 void SprAttrReset(s16, s16, s32);                        /* extern */
 void SprAttrSet(s16, s16, s32);                          /* extern */
 void SprPosSet(s16, s32, s16, s16);                      /* extern */
@@ -28,14 +54,109 @@ extern Vec2f D_800FC990_FD590[];
 extern UnkItemSprite2 D_800FC9EC_FD5EC[];
 extern Vec2f D_800FD854_FE454[];
 extern s8 D_800FDC9C_FE89C;
-extern SpriteStuff D_80101510_102110[];
+extern BoardStatus D_80101510_102110[];
 extern Unk D_800CC99C_CD59C[];
 extern s32 D_800E1D48_E2948[];
 
-INCLUDE_ASM(const s32, "5F3B0", func_8005E7B0_5F3B0);
+s32 func_80059FD0_5ABD0(s32);
+void func_8008221C_82E1C(s16, s16, f32);
+void func_8008225C_82E5C(s16, s16, s32);
+void func_800822A8_82EA8(s16, s16, u16, s32);
+
+typedef struct UnkCoinThing {
+    u8 unk_00[3];
+    char unk_03[5];
+    s16 unk_08[2];
+} UnkCoinThing;
+
+void func_8005E7B0_5F3B0(s32 arg0) {
+    UnkCoinThing coinDigits;
+    BoardStatus* temp_s2;
+    s32 var_v1;
+    s32 i;
+    
+    temp_s2 = &D_80101510_102110[arg0];
+    coinDigits.unk_00[0] = gPlayers[arg0].coins / 100;
+    coinDigits.unk_00[1] = gPlayers[arg0].coins / 10 % 10;
+    coinDigits.unk_00[2] = gPlayers[arg0].coins % 10;
+
+    if (coinDigits.unk_00[0] == 0) {
+        if (coinDigits.unk_00[1] == 0) {
+            var_v1 = 1;
+        } else {
+            var_v1 = 2 | (-(coinDigits.unk_00[0] != 0) & 3);
+        }
+    } else {
+        var_v1 = 2 | (-(coinDigits.unk_00[0] != 0) & 3);
+    }
+    
+    if (var_v1 == 1) {
+        SprAttrSet(temp_s2->unk_08, 6, 0x8000);
+        coinDigits.unk_00[1] = coinDigits.unk_00[2];
+    } else {
+        SprAttrReset(temp_s2->unk_08, 6, 0x8000);
+    }
+
+    if (coinDigits.unk_00[0] == 0) {
+        coinDigits.unk_00[0] = 10;
+    }
+    for (i = 0; i < 3; i++) {
+        func_800822A8_82EA8(temp_s2->unk_08, i + 4, coinDigits.unk_00[i], 0);
+        func_8008225C_82E5C(temp_s2->unk_08, i + 4, 1);
+    }
+
+    if (gPlayers[arg0].stars > 99) {
+        func_800822A8_82EA8(temp_s2->unk_08, 7, 9, 0);
+        func_800822A8_82EA8(temp_s2->unk_08, 8, 9, 0);
+    } else {
+        if (gPlayers[arg0].stars > 9) {
+            func_800822A8_82EA8(temp_s2->unk_08, 7, (gPlayers[arg0].stars / 10), 0);
+        } else {
+            func_800822A8_82EA8(temp_s2->unk_08, 7, 10, 0);
+        }
+        func_800822A8_82EA8(temp_s2->unk_08, 8, gPlayers[arg0].stars % 10, 0);
+    }
+    func_8008225C_82E5C(temp_s2->unk_08, 7, 1);
+    func_8008225C_82E5C(temp_s2->unk_08, 8, 1);
+
+    coinDigits.unk_08[0] = gPlayers[arg0].coins;
+    coinDigits.unk_08[1] = gPlayers[arg0].stars;
+    for (i = 0; i < 2; i++) {
+        if ((i != 0 && temp_s2->unk_44[i] != coinDigits.unk_08[i]) || (i == 0 && D_800E1D48_E2948[arg0] != 0)) {
+            if (temp_s2->unk2[i] == 0) {
+                func_8008221C_82E1C(temp_s2->unk_08, i + 2, 1.0f);
+                temp_s2->unk2[i] = 0xF;
+            }
+        }
+
+        if (temp_s2->unk2[i] != 0) {
+            temp_s2->unk2[i]--;
+            if (temp_s2->unk2[i] == 0) {
+                if (i != 0 || D_800E1D48_E2948[arg0] == 0) {
+                    func_800822A8_82EA8(temp_s2->unk_08, i + 2, 0U, 0);
+                    func_8008221C_82E1C(temp_s2->unk_08, i + 2, 0);
+                    func_8008225C_82E5C(temp_s2->unk_08, i + 2, 1);                       
+                }
+            }
+        }
+        temp_s2->unk_44[i] = coinDigits.unk_08[i];
+    }
+    if (temp_s2->unk1 != -1) {
+        func_800822A8_82EA8(temp_s2->unk_08, 0xA, temp_s2->unk1, 0);
+    } else {
+        s32 temp = func_80059FD0_5ABD0(arg0);
+        func_800822A8_82EA8(temp_s2->unk_08, 0xA, temp, 0);
+    }
+    func_8008225C_82E5C(temp_s2->unk_08, 0xA, 1);
+    if (func_80068328_68F28(0xD) != 0) {
+        SprAttrSet(temp_s2->unk_08, 7, 0x8000);
+        SprAttrSet(temp_s2->unk_08, 8, 0x8000);
+        SprAttrSet(temp_s2->unk_08, 3, 0x8000);
+    }
+}
 
 void func_8005ECB8_5F8B8(void) {
-    SpriteStuff* sprite;
+    BoardStatus* sprite;
     s32 i, j;
 
     for (i = 0; i < 4; i++) {
@@ -48,7 +169,7 @@ void func_8005ECB8_5F8B8(void) {
 
 void func_8005ED40_5F940(void) {
     s32 i, j;
-    SpriteStuff* sprite;
+    BoardStatus* sprite;
 
     while (1) {
         if (D_800FDC9C_FE89C == 0) {
@@ -162,7 +283,7 @@ INCLUDE_ASM(const s32, "5F3B0", func_8005FAB4_606B4);
 INCLUDE_ASM(const s32, "5F3B0", func_8005FC50_60850);
 
 void func_8005FCE8_608E8(s32 arg0) {
-    SpriteStuff* sprite;
+    BoardStatus* sprite;
     s32 i;
 
     sprite = &D_80101510_102110[arg0];
