@@ -1,5 +1,12 @@
 #include "common.h"
 
+void func_8008DCDC_8E8DC(void);
+extern s8 D_800ED8E6_EE4E6;
+extern s16 D_800ED8E8_EE4E8;
+extern u8 D_800ED8E9_EE4E9;
+extern s16 D_800ED8EA_EE4EA;
+extern s8 D_8010106E_101C6E[];
+
 INCLUDE_ASM(const s32, "84FF0", SprDispCheck);
 
 INCLUDE_ASM(const s32, "84FF0", DispCheck);
@@ -207,7 +214,13 @@ INCLUDE_ASM(const s32, "84FF0", func_8008D8BC_8E4BC);
 
 INCLUDE_ASM(const s32, "84FF0", func_8008D904_8E504);
 
-INCLUDE_ASM(const s32, "84FF0", func_8008D974_8E574);
+void func_8008D974_8E574(s32 arg0, s16 arg1) {
+    D_800ED8E6_EE4E6 = 1;
+    D_800ED8EA_EE4EA = 0;
+    D_800ED8E8_EE4E8 = 0;
+    func_8008DCDC_8E8DC();
+    D_8010106E_101C6E[arg1] = D_800ED8E9_EE4E9;
+}
 
 INCLUDE_ASM(const s32, "84FF0", func_8008D9D0_8E5D0);
 

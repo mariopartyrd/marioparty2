@@ -31,7 +31,7 @@ void func_80102800_40A330(void) {
 }
 
 void func_80102884_40A3B4_MinigameCoaster(s16 arg0) {
-    s32 thing = 1 << gPlayers[0].controller_port;
+    s32 thing = 1 << gPlayers[0].port;
     func_8008D59C_8E19C(arg0, thing);
 }
 

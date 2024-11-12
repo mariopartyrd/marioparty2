@@ -45,17 +45,17 @@ typedef struct UnkBoardStatus {
     s16 unk_26;
 } UnkBoardStatus; //sizeof 0x28
 
-typedef struct PlayerData {
+typedef struct GW_PLAYER {
 /* 0x00 */ u8 group; //for which group you belong to in a minigame
 /* 0x01 */ u8 cpu_difficulty;
 /* 0x02 */ u8 cpu_difficulty2; //copied from 0x01 for some reason..?
-/* 0x03 */ u8 controller_port;
-/* 0x04 */ u8 characterID;
-/* 0x05 */ char padding_05;
+/* 0x03 */ u8 port;
+/* 0x04 */ u8 character;
+/* 0x05 */ char unk_05; //likely padding
 /* 0x06 */ s16 flags;
 /* 0x08 */ s16 coins;
-/* 0x0A */ s16 extra_coins_collected_during_minigame;
-/* 0x0C */ s16 minigameCoinsWon; //coins won on current minigame, also stores battle placement briefly
+/* 0x0A */ s16 coins_mg;
+/* 0x0C */ s16 coins_mg_bonus; //coins won on current minigame, also stores battle placement briefly
 /* 0x0E */ s16 stars;
 /* 0x10 */ s16 cur_chain_index;
 /* 0x12 */ s16 cur_space_index;
@@ -68,8 +68,8 @@ typedef struct PlayerData {
 /* 0x1C */ char unk_1C[4];
 /* 0x20 */ void* unk_20;
 /* 0x24 */ void* unk_24;
-/* 0x28 */ s16 minigame_coins_collected;
-/* 0x2A */ s16 coinPeak; //used for coin star
+/* 0x28 */ s16 coins_total;
+/* 0x2A */ s16 coins_max; //used for coin star
 /* 0x2C */ u8 happening_spaces_landed_on;
 /* 0x2D */ u8 red_spaces_landed_on;
 /* 0x2E */ u8 blue_spaces_landed_on;
@@ -78,11 +78,8 @@ typedef struct PlayerData {
 /* 0x31 */ u8 battle_spaces_landed_on;
 /* 0x32 */ u8 item_spaces_landed_on;
 /* 0x33 */ u8 bank_spaces_landed_on;
-} PlayerData __attribute__((aligned(4))); //sizeof 0x34
-//P1 - 800FD2C0
-//P2 - 800FD2F4
-//P3 - 800FD328
-//P4 - 800FD35C
+} GW_PLAYER __attribute__((aligned(4))); //sizeof 0x34
+//P1 800FD2C0, P2 800FD2F4, P3 800FD328, P4 800FD35C
 
 typedef struct omObjData {
 /* 0x00 */ u16 stat;

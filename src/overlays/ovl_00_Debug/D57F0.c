@@ -1,5 +1,8 @@
 #include "common.h"
 
+#define PAGES_MAX 7
+#define ROWS 10
+
 typedef struct UnkDebug0 {
     s16 unk0;
     s16 unk2;
@@ -92,7 +95,7 @@ void func_801059B0_D89A0_Debug(s16 arg0);
 void func_80103E50_D6E40_Debug(void);
 void func_80104ADC_D7ACC_Debug(void);
 
-extern PlayerData debug_gPlayers[4];
+extern GW_PLAYER debug_gPlayers[4];
 extern s32 D_800F8420_F9020;
 extern f32 D_800FA610_FB210;
 extern Vec D_800FD474_FE074;
@@ -126,7 +129,7 @@ extern s16 D_801072A4_DA294_Debug[];
 extern u8 D_801073C0_DA3B0_Debug[];
 extern s16 D_801073F0_DA3E0_Debug[];
 extern s32 D_80107460_DA450_Debug[];
-extern PlayerData debug_gPlayers[4];
+extern GW_PLAYER debug_gPlayers[4];
 extern u8 D_801073BC_DA3AC_Debug[];
 extern DebugOverlayData debug_ovl_table[];
 extern u32 D_800CD408_CE008;
@@ -158,7 +161,7 @@ void func_80102800_D57F0_Debug(void) {
     if (D_800CD408_CE008 < 0x47U) {
         //award players coins collected during minigame
         for (i = 0; i < 4; i++) {
-            s16 totalCoins = gPlayers[i].coins + gPlayers[i].extra_coins_collected_during_minigame;
+            s16 totalCoins = gPlayers[i].coins + gPlayers[i].coins_mg;
             gPlayers[i].coins = totalCoins;
             if (totalCoins > 999) {
                 gPlayers[i].coins = 999;
@@ -166,7 +169,7 @@ void func_80102800_D57F0_Debug(void) {
             if (gPlayers[i].coins < 0) {
                 gPlayers[i].coins = 0;
             }
-            gPlayers[i].extra_coins_collected_during_minigame = 0;
+            gPlayers[i].coins_mg = 0;
         }
     }
     
@@ -257,7 +260,7 @@ void func_80103594_D6584_Debug(omObjData* arg0) {
     }
 
     for (i = 0; i < 4; i++) {
-        gPlayers[i].characterID = i;
+        gPlayers[i].character = i;
         D_801073F0_DA3E0_Debug[i] = i;
         D_801073BC_DA3AC_Debug[i] = 0;
         D_80107460_DA450_Debug[i] = 0;
@@ -271,15 +274,15 @@ void func_80103594_D6584_Debug(omObjData* arg0) {
 
     D_801072A0_DA290_Debug = -1;
 
-    for (i = 0; i < 7; i++, j = 0) {
-        for (j = 0; j < 10; j++) {
+    for (i = 0; i < PAGES_MAX; i++, j = 0) {
+        for (j = 0; j < ROWS; j++) {
             //this seems kind of odd...
-            if (debug_ovl_table[i * 10 + j].unk0 != 1) {
+            if (debug_ovl_table[i * ROWS + j].unk0 != 1) {
                 break;
             }        
         }
 
-        if (j == 10) {
+        if (j == ROWS) {
             D_801072A4_DA294_Debug[i] = -1;
         } else {
             D_801072A4_DA294_Debug[i] = j;
@@ -291,8 +294,8 @@ void func_80103594_D6584_Debug(omObjData* arg0) {
     if (D_800CD408_CE008 != 999) {
         for (i = 0; i < 0x46; i++) {
             if (debug_ovl_table[i].unk4 == D_800CD408_CE008) {
-                D_801072A0_DA290_Debug = i / 10;
-                D_801072A2_DA292_Debug = i % 10;
+                D_801072A0_DA290_Debug = i / ROWS;
+                D_801072A2_DA292_Debug = i % ROWS;
                 D_801072A4_DA294_Debug[D_801072A0_DA290_Debug] = D_801072A2_DA292_Debug;
             }            
         }
@@ -313,12 +316,12 @@ void func_80103838_D6828_Debug(omObjData* arg0) {
     s32 i;
 
     rand8();
-    var_s1 = &debug_ovl_table[D_801072A0_DA290_Debug * 10];
-    for (i = 0; i < 10; i++, var_s1++) {
+    var_s1 = &debug_ovl_table[D_801072A0_DA290_Debug * ROWS];
+    for (i = 0; i < ROWS; i++, var_s1++) {
         sprintf(D_80101080_101C80, var_s1->name);
         func_800A5610_A6210(D_80101080_101C80);
         
-        if (debug_ovl_table[(D_801072A0_DA290_Debug * 10) + i].unk0 == 0) {
+        if (debug_ovl_table[(D_801072A0_DA290_Debug * ROWS) + i].unk0 == 0) {
             var_v1 = &D_80106934_D9924_Debug[0];
         } else {
             var_v1 = &D_80106934_D9924_Debug[1];
@@ -338,7 +341,7 @@ void func_80103838_D6828_Debug(omObjData* arg0) {
     espPosSet(D_80107406_DA3F6_Debug, 0x3C, (s16) (((D_801072A2_DA292_Debug + 0xB) * 9) - 1));
     for (i = 0; i < 4; i++) {
         if (HuGetPadInserted(i) != 0) {
-            if ((D_80107470_DA460_Debug[i] & 0x90) && (debug_ovl_table[(D_801072A0_DA290_Debug * 10) + D_801072A2_DA292_Debug].unk0 == 0)) {
+            if ((D_80107470_DA460_Debug[i] & 0x90) && (debug_ovl_table[(D_801072A0_DA290_Debug * ROWS) + D_801072A2_DA292_Debug].unk0 == 0)) {
                 if (D_801069D8_D99C8_Debug == 0) {
                     omAddObj(2, 0U, 0U, -1, &func_80104FA4_D7F94_Debug);
                     D_801069D8_D99C8_Debug = 1;
@@ -441,7 +444,7 @@ void func_80104ADC_D7ACC_Debug(void) {
     var_s5 = 0xC;
     var_s4 = 6;
     rand8();
-    sprintf(D_80101080_101C80, debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].name);
+    sprintf(D_80101080_101C80, debug_ovl_table[D_801072A0_DA290_Debug * ROWS + D_801072A2_DA292_Debug].name);
     
     temp_s3 = (u32) (0x140 - (func_800A5610_A6210(D_80101080_101C80) * 8)) >> 1;
     temp_s2 = (D_801072A2_DA292_Debug + 0xA) * 9;
@@ -462,7 +465,7 @@ void func_80104ADC_D7ACC_Debug(void) {
             func_8001A788_1B388(D_80107410_DA400_Debug[D_801069EC_D99DC_Debug], 0x8000U);
             func_8001A91C_1B51C(D_80107410_DA400_Debug[D_801069EC_D99DC_Debug], 0.75f, 0.75f);
             func_8001A7C8_1B3C8(D_80107410_DA400_Debug[D_801069EC_D99DC_Debug], 8.0f);
-            espPosSet(D_80107410_DA400_Debug[D_801069EC_D99DC_Debug], (temp_s3 + (func_800A5610_A6210(debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].name) * 8)), ((temp_s2 - D_801069E8_D99D8_Debug) + var_s4) + 8);
+            espPosSet(D_80107410_DA400_Debug[D_801069EC_D99DC_Debug], (temp_s3 + (func_800A5610_A6210(debug_ovl_table[D_801072A0_DA290_Debug * ROWS + D_801072A2_DA292_Debug].name) * 8)), ((temp_s2 - D_801069E8_D99D8_Debug) + var_s4) + 8);
             func_8001A96C_1B56C(D_80107410_DA400_Debug[D_801069EC_D99DC_Debug], 255, 255, 0xBE);
             D_801069EC_D99DC_Debug += 1;
             D_801069F0_D99E0_Debug = 4;
@@ -535,13 +538,13 @@ void func_80105A2C_D8A1C_Debug(s32 arg0) {
     temp = var_a2 = D_801072A0_DA290_Debug;
     do {
         var_a2 += arg0;
-        if (var_a2 >= 7) {
+        if (var_a2 >= PAGES_MAX) {
             var_a2 = 0;
         } else if (var_a2 < 0) {
             var_a2 = 6;
         }
-        for (j = 0; j < 10; j++) {
-            if (debug_ovl_table[var_a2 * 10 + j].unk0 == 0) {
+        for (j = 0; j < ROWS; j++) {
+            if (debug_ovl_table[var_a2 * ROWS + j].unk0 == 0) {
                 var_a3 = 1;
                 break;
             }
@@ -569,11 +572,11 @@ void func_80105B5C_D8B4C_Debug(u16 arg0, u16 arg1, char* arg2, u16 arg3, u16 arg
 }
 
 void func_80105BDC_D8BCC_Debug(void) {
-    PlayerData* temp_v0;
+    GW_PLAYER* temp_v0;
     u8* temp_v1;
 
-    temp_v1 = debug_unkTable[debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].overlayID - 1].groups;
-    //surely this is fake...right?
+    temp_v1 = debug_unkTable[debug_ovl_table[D_801072A0_DA290_Debug * ROWS + D_801072A2_DA292_Debug].overlayID - 1].groups;
+    //surely this is fake...
     temp_v0 = &debug_gPlayers[0];
     (temp_v0++)->group = temp_v1[0];
     (temp_v0++)->group = temp_v1[1];
@@ -583,8 +586,8 @@ void func_80105BDC_D8BCC_Debug(void) {
 
 void func_80105C50_D8C40_Debug(void) {
     s32 i;
-    PlayerData* player;
-    PlayerData* debugPlayer;
+    GW_PLAYER* player;
+    GW_PLAYER* debugPlayer;
 
     for (i = 0; i < MAX_PLAYERS; i++, player++, debugPlayer++) {
         debugPlayer = &debug_gPlayers[i];
@@ -592,7 +595,7 @@ void func_80105C50_D8C40_Debug(void) {
         
         player->flags = debugPlayer->flags;
         player->group = debugPlayer->group;
-        player->controller_port = debugPlayer->controller_port;
+        player->port = debugPlayer->port;
         player->cpu_difficulty = debugPlayer->cpu_difficulty;
         player->coins = debugPlayer->coins;
     }
@@ -638,6 +641,6 @@ void func_80105D9C_D8D8C_Debug(void) {
             }
         }
         sp10[randInt] = 1;
-        debug_gPlayers[i].controller_port = randInt;
+        debug_gPlayers[i].port = randInt;
     }
 }

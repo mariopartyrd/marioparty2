@@ -5,5 +5,5 @@
 
 extern UnkBoardStatus D_800F93A8;
 extern s16 gCurrentPlayerIndex;
-extern PlayerData gPlayers[4];
+extern GW_PLAYER gPlayers[4];
 #endif //_TYPES_H_

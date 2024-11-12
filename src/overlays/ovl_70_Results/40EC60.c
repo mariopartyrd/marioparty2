@@ -31,7 +31,7 @@ void func_801028A0_40ED00_Results(void) {
     if (D_801076A2_413B02_Results != 1) {
         for (i = 0; i < 4; i++) {
             if (!(gPlayers[i].flags & 1)) {
-                if (D_800F9D24_FA924[gPlayers[i].controller_port] & (A_BUTTON | START_BUTTON)) {
+                if (D_800F9D24_FA924[gPlayers[i].port] & (A_BUTTON | START_BUTTON)) {
                     D_801076A1_413B01_Results = 1;
                 }
             }

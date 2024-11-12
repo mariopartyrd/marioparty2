@@ -39,8 +39,8 @@ void func_80102800_406640_FinalMinigameCoaster(void) {
     func_8005E570_5F170();
     omAddPrcObj(&func_80105CE8_409B28_FinalMinigameCoaster, 0x300U, 0x2000, 0);
     omAddObj(0x1000, 0, 0, -1, &func_80105FBC_409DFC_FinalMinigameCoaster);
-    gPlayers[0].characterID = D_800FD8A8_FE4A8.unk0;
-    gPlayers[1].characterID = D_800FD8A8_FE4A8.unk1;
+    gPlayers[0].character = D_800FD8A8_FE4A8.unk0;
+    gPlayers[1].character = D_800FD8A8_FE4A8.unk1;
     if (D_800FD8A8_FE4A8.unk4 == 2) {
         if (D_800CD414_CE014 == 0) {
             if (func_80075390_75F90(8) != 0) {
@@ -55,7 +55,7 @@ void func_80102800_406640_FinalMinigameCoaster(void) {
 }
 
 void func_801028E0_406720_FinalMinigameCoaster(s16 arg0) {
-    s32 thing = 1 << gPlayers[0].controller_port;
+    s32 thing = 1 << gPlayers[0].port;
     func_8008D59C_8E19C(arg0, thing);
 }
 

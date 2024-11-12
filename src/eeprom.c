@@ -142,9 +142,7 @@ u16 GetSaveFileChecksum(u16 checksumAddrOffset, u16 size) {
     checksumAddrOffset += EEPROM_BLOCK_SIZE;
 
     while (size--) {
-        offset = checksumAddrOffset;
-        checksumAddrOffset++;
-        checksumTotal += D_800D89F0_D95F0[offset];
+        checksumTotal += D_800D89F0_D95F0[checksumAddrOffset++];
         if ((checksumAddrOffset) >= (EEPROM_MAXBLOCKS * EEPROM_BLOCK_SIZE)) {
             break;
         }
