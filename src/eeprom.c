@@ -135,7 +135,6 @@ s32 func_8001B0E8_1BCE8(UnkEep* arg0) {
 }
 
 u16 GetSaveFileChecksum(u16 checksumAddrOffset, u16 size) {
-    u16 offset;
     u16 checksumTotal;
 
     checksumTotal = 0;

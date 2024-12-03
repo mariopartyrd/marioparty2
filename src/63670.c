@@ -94,7 +94,7 @@ void func_80063950_64550(void) {
         
         if (D_800E1F94_E2B94 & 0x20) {
             D_800E1F82_E2B82 = 1;
-            if ((D_800F93A8.unk_02 == 5) && (func_80068328_68F28(0xB) == 0)) {
+            if ((D_800F93A8.unk_02 == 5) && (_CheckFlag(0xB) == 0)) {
                 func_80062A70_63670(0x61, 0, 0x192);
             }
             func_80062A70_63670(0x52, 0, 0x192);
@@ -144,7 +144,44 @@ INCLUDE_ASM(const s32, "63670", func_800645C8_651C8);
 
 INCLUDE_ASM(const s32, "63670", func_80064C98_65898);
 
-INCLUDE_ASM(const s32, "63670", func_80064DA8_659A8);
+s16 func_80055900_56500(u8);
+extern s16 coinBlockSpaceIndex;
+extern s16 prevCoinBlockSpaceIndexes[10];
+extern u16 D_800FA654_FB254;
+extern u16 D_800FC878_FD478;
+extern s16 starBlockSpaceIndex;
+extern s16 prevStarBlockSpaceIndexes[10];
+
+void func_80064DA8_659A8(void) {
+    s32 i;
+
+    if (_CheckFlag(0xD) == 0 && _CheckFlag(0x4E) != 0) {
+        while (coinBlockSpaceIndex == -1 || coinBlockSpaceIndex == starBlockSpaceIndex) {
+            coinBlockSpaceIndex = func_80055900_56500(D_800FC878_FD478);
+            D_800FC878_FD478 += 1;
+            for (i = 0; i < 10; i++) {
+                if (coinBlockSpaceIndex == prevCoinBlockSpaceIndexes[i]) {
+                    break;
+                }
+            }
+            if (i != 0xA) {
+                coinBlockSpaceIndex = -1;
+            }
+        }
+        while (starBlockSpaceIndex == -1 || coinBlockSpaceIndex == starBlockSpaceIndex) {
+            starBlockSpaceIndex = func_80055900_56500(D_800FA654_FB254);
+            D_800FA654_FB254 += 1;
+            for (i = 0; i < 10; i++) {
+                if (starBlockSpaceIndex == prevStarBlockSpaceIndexes[i]) {
+                    break;
+                }
+            }
+            if (i != 0xA) {
+                starBlockSpaceIndex = -1;
+            }
+        }
+    }
+}
 
 INCLUDE_ASM(const s32, "63670", func_80064F1C_65B1C);
 

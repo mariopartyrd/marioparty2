@@ -190,6 +190,15 @@ debug_unkTable = 0x801064A0; // type:s32 size:0x480 segment:Debug
 D_800F8CD8 = 0x800F8CD8; //type:u8
 gNumOfControllers = 0x800FD868; // type:s16
 
+D_800CF7B0_D03B0 = 0x800CF7B0; //rom:0xD03B0 type:f64 size:0x320
+
+coinBlockSpaceIndex = 0x800FA608; //type:s16
+starBlockSpaceIndex = 0x800FD418; //type:s16
+prevCoinBlockSpaceIndexes = 0x800E1FB8; //type:s16 size:0x14
+prevStarBlockSpaceIndexes = 0x800E1FD0; //type:s16 size:0x14
+GetSpaceData = 0x80054B8C; //rom:0x5578C
+
+_CheckFlag = 0x80068328; //rom:0x68F28
 
 D_801076C4_413B24_Results = 0x801076C4; // type:s16 size:0x10 rom:0x413B24 segment:Results
 D_801076D4_413B34_Results = 0x801076D4; // type:s16 size:0x10 rom:0x413B34 segment:Results

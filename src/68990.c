@@ -41,9 +41,9 @@ INCLUDE_ASM(const s32, "68990", func_800682E0_68EE0);
 void func_80068320_68F20(void) {
 }
 
-INCLUDE_ASM(const s32, "68990", func_80068328_68F28);
-
-extern u8 D_800F8CD8[];
+s32 _CheckFlag(s32 arg0) {
+    return D_800F8CD8[arg0 / 8] & (1 << (arg0 % 8));
+}
 
 void _SetFlag(s32 input) {
     s32 adjustedInput;

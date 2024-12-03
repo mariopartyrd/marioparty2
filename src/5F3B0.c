@@ -148,7 +148,7 @@ void func_8005E7B0_5F3B0(s32 arg0) {
         func_800822A8_82EA8(temp_s2->unk_08, 0xA, temp, 0);
     }
     func_8008225C_82E5C(temp_s2->unk_08, 0xA, 1);
-    if (func_80068328_68F28(0xD) != 0) {
+    if (_CheckFlag(0xD) != 0) {
         SprAttrSet(temp_s2->unk_08, 7, 0x8000);
         SprAttrSet(temp_s2->unk_08, 8, 0x8000);
         SprAttrSet(temp_s2->unk_08, 3, 0x8000);

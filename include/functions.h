@@ -8,7 +8,7 @@
 s32 func_8007EE0C_7FA0C(unkfunc_8007EE0C* arg0, void* GetEepType, UnkEep** arg2, s32 arg3);
 u8 rand8(void);
 void func_80062B14_63714(void);
-s32 func_80068328_68F28(s32);
+s32 _CheckFlag(s32);
 void _SetFlag(s32);
 void _ClearFlag(s32);
 void func_80044F88_45B88(s32, s32);
@@ -62,5 +62,5 @@ void func_800593C0_59FC0(void);
 void func_8005965C_5A25C(void);
 void func_8005E2B8_5EEB8(void);
 void func_80029E80_2AA80(s16, s32, s32);
-void omDelPrcObj(s32);
+void omDelPrcObj(void*);
 #endif

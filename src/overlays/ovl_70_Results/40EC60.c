@@ -89,7 +89,7 @@ void func_80103C6C_4100CC_Results(void) {
     SprKill(D_80107910_413D70_Results);
     SprKill(D_80107918_413D78_Results);
     SprKill(D_80107CE0_414140_Results);
-    var_s0_3 = (func_80068328_68F28(0xD) != 0) * 4;
+    var_s0_3 = (_CheckFlag(0xD) != 0) * 4;
 
     for (; var_s0_3 < 8; var_s0_3++) {
         func_8006AE14_6BA14(&D_80107920_413D80_Results[var_s0_3]);

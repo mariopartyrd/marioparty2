@@ -5,7 +5,7 @@
 extern u16 D_8010163C_10223C;
 
 void func_80102830_2978C0_name_3D(void) {
-    if (func_80068328_68F28(0) != 0) {
+    if (_CheckFlag(0) != 0) {
         _SetFlag(0x41);
     } else {
         _ClearFlag(0x41);

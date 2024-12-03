@@ -141,7 +141,17 @@ INCLUDE_ASM(const s32, "58080", func_8005A1D8_5ADD8);
 
 INCLUDE_ASM(const s32, "58080", func_8005A29C_5AE9C);
 
-INCLUDE_ASM(const s32, "58080", func_8005A358_5AF58);
+s32 func_8005A358_5AF58(f32 arg0) {
+    // rand8 returns an unsigned byte
+    u8 randomByte1 = rand8();
+    u8 randomByte2 = rand8();
+    s32 shiftedByte1 = (randomByte1 << 8);
+
+    // Normalize the 16-bit number to the range [0, 1), then multiply by arg0
+    s32 scaledRandom = ((randomByte2 | shiftedByte1) / 65536.0f)* arg0;
+    
+    return scaledRandom;
+}
 
 INCLUDE_ASM(const s32, "58080", func_8005A3C4_5AFC4);
 
@@ -284,6 +294,8 @@ INCLUDE_ASM(const s32, "58080", func_8005E1A0_5EDA0);
 INCLUDE_ASM(const s32, "58080", func_8005E1DC_5EDDC);
 
 INCLUDE_ASM(const s32, "58080", func_8005E228_5EE28);
+
+GW_PLAYER* BoardPlayerGet(s32);
 
 void func_8005E260_5EE60(s16 playerIndex) {
     s32 temp_a0;

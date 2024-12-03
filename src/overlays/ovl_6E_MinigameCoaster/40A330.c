@@ -3,7 +3,7 @@
 void func_8005E584_5F184(void);
 void func_80050AE0_516E0(void);
 void func_80050E1C_51A1C(void);
-void func_8004430C_44F0C(s32);
+void func_8004430C_44F0C(void*);
 void func_800581D0_58DD0(void);
 void func_80059400_5A000(void);
 void func_80059704_5A304(void);
