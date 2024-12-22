@@ -46,6 +46,24 @@ typedef struct DebugOverlayData {
     char* name;
 } DebugOverlayData; //size of this is probably wrong?
 
+
+typedef struct UnkDebug6 {
+    u8 unk_00[8];
+    u16 unk_08[4];
+} UnkDebug6;
+
+extern char* D_801069B4_D99A4_Debug[];
+extern s16 gNumOfControllers;
+extern s16 D_800F9D24_FA924[];
+extern s16 D_800FD7FE;
+void func_80029714_2A314(s16, f32, f32, f32);              /* extern */
+void func_8002979C_2A39C(s16, f32, f32, f32);              /* extern */
+void func_800297E8_2A3E8(s16, f32, f32, f32);                /* extern */
+void func_800298A4_2A4A4(s16, s32, s32);                   /* extern */
+void func_80029B80_2A780(s16, s16);                    /* extern */
+void func_8008F624_90224(s32, s32, s32);                     /* extern */
+void func_80105C50_D8C40_Debug(void);                      /* extern */
+
 void func_8001A7C8_1B3C8(u16, f32);
 void DrawDebugText(u16, u16, char*);
 s32 HuGetPadInserted(s16);
@@ -115,7 +133,7 @@ extern s16 D_801073D8_DA3C8_Debug[];
 extern s16 D_801073E4_DA3D4_Debug[];
 extern s8 D_801073F8_DA3E8_Debug[4];
 extern s8 D_801073FC_DA3EC_Debug[4];
-extern s8 D_80107400_DA3F0_Debug;
+extern u8 D_80107400_DA3F0_Debug;
 extern s16 D_80107402_DA3F2_Debug;
 extern s16 D_80107404_DA3F4_Debug;
 extern s16 D_80107408_DA3F8_Debug;
@@ -128,7 +146,7 @@ extern s16 D_801072A2_DA292_Debug;
 extern s16 D_801072A4_DA294_Debug[];
 extern u8 D_801073C0_DA3B0_Debug[];
 extern s16 D_801073F0_DA3E0_Debug[];
-extern s32 D_80107460_DA450_Debug[];
+extern f32 D_80107460_DA450_Debug[];
 extern GW_PLAYER debug_gPlayers[4];
 extern u8 D_801073BC_DA3AC_Debug[];
 extern DebugOverlayData debug_ovl_table[];
@@ -263,7 +281,7 @@ void func_80103594_D6584_Debug(omObjData* arg0) {
         gPlayers[i].character = i;
         D_801073F0_DA3E0_Debug[i] = i;
         D_801073BC_DA3AC_Debug[i] = 0;
-        D_80107460_DA450_Debug[i] = 0;
+        D_80107460_DA450_Debug[i] = 0.0f;
     }
 
     for (i = 0; i < 4; i++) {
@@ -506,7 +524,173 @@ void func_80104FA4_D7F94_Debug(omObjData* obj) {
 }
 
 //used after minigame is selected, character select is on screen
-INCLUDE_ASM(const s32, "overlays/ovl_00_Debug/D57F0", func_80104FB4_D7FA4_Debug);
+
+void func_80104FB4_D7FA4_Debug(omObjData * obj) {
+    UnkDebug6 sp18;
+    s16 temp_s0_3;
+    s32 var_s0;
+    u8 var_s0_4;
+    u8 var_s3;
+    u8 var_s4;
+    s32 var_s1;
+    s32 i, j;
+
+    var_s0 = 0;
+    if (D_80107400_DA3F0_Debug == 1) {
+        if (func_8008F618_90218() == 0) {
+            func_800794A8_7A0A8(0x28);
+            func_80105C50_D8C40_Debug();
+            D_800F93A8.unk_20 = debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].overlayID;
+            D_800F93A8.unk_1E = 0;
+            if (((D_800CD40E == 0) || (D_800CD40E == 2))) {
+                if (D_800CD40E == 0) {
+                    _ClearFlag(0xC);
+                } else {
+                    _SetFlag(0xC);
+                }
+                omOvlCallEx(func_8003F6F0_402F0(D_800F93A8.unk_20), 0, 0x84); // intentionally implicit
+                return;
+            }
+            if (D_800CD40E == 1) {
+                _ClearFlag(0xC);
+                omOvlCallEx(debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].unk4, 0, 0x92);
+            }
+        }
+    } else {
+        for (i = 0; i < 4; i++) {
+            var_s0 += D_801073BC_DA3AC_Debug[i] == 1;
+        }
+        var_s4 = 0;
+
+        for (i = 0; i < 4; i++) {
+            if (HuGetPadInserted(i) == 0) {
+                sp18.unk_08[var_s4++] = i;
+            }
+        }
+
+        if (var_s0 == gNumOfControllers) {
+            if (var_s0 < 4) {
+                for (var_s3 = 0; var_s3 < var_s4; var_s3++) {
+                    var_s0_4 = 0;
+                    for (i = 0; i < 6; i++) {
+                        sp18.unk_00[i] = 0;
+                    }
+
+                    for (i = 0; i < 6; i++) {
+                        if (D_801073C0_DA3B0_Debug[i] == 0) {
+                            sp18.unk_00[var_s0_4++] = i;
+                        }
+                    }
+
+                    if (var_s0_4 == 1) {
+                        gPlayers[sp18.unk_08[var_s3]].character = sp18.unk_00[0];
+                        D_801073C0_DA3B0_Debug[sp18.unk_00[0]] = 1;
+                    } else {
+                        u8 a0 = rand8() % var_s0_4;
+                        gPlayers[sp18.unk_08[var_s3]].character = sp18.unk_00[a0];
+                        D_801073C0_DA3B0_Debug[sp18.unk_00[a0]] = 1;
+                    }
+                    
+                    var_s0_4 = 0;
+                }
+            }
+            func_8008F624_90224(0, 0, 0);
+            InitFadeOut(0, 0x14);
+            D_80107400_DA3F0_Debug = 1;
+            D_800FD7FE = 0;
+            for (i = 0; i < 4; i++) {
+                if ((HuGetPadInserted(i) != 0) && (D_800F9D24_FA924[i] & 0x20)) {
+                    D_800FD7FE = 1;
+                    break;
+                }
+            }            
+        } else {
+            for (i = 0; i < 4; i++) {
+                if ((HuGetPadInserted(i) != 0) && ((u16) D_8010163C_10223C[i] & 0x1000)) {
+                    for (j = 0; j < 4; j++) {
+                        if (HuGetPadInserted(j) != 0) {
+                            D_80107470_DA460_Debug[j] = D_80107470_DA460_Debug[j] | 0x10;
+                        }
+                    }
+                }
+            }
+
+            for (i = 0; i < 4; i++) {
+                if (HuGetPadInserted(i) == 0) {
+                    sprintf(D_80101080_101C80, "------");
+                    func_80105B5C_D8B4C_Debug(((i * 0x38) + 0x38) & 0xFFFF, 0x90U, D_80101080_101C80, 0xFU, 7U);
+                } else {
+                    func_800298A4_2A4A4(D_801073C6_DA3B6_Debug[gPlayers[i].character], 4, 0);
+                    func_80029714_2A314(D_801073C6_DA3B6_Debug[gPlayers[i].character], (f32)(i * 0x1A4) - 650.0f, -120.0f, 0.0f);
+                    func_800297E8_2A3E8(D_801073C6_DA3B6_Debug[gPlayers[i].character], 2.0f, 2.0f, 2.0f);
+                    if (D_801073BC_DA3AC_Debug[i] == 1) {
+                        D_80107460_DA450_Debug[i] = 0.0f;
+                    }
+                    func_8002979C_2A39C(D_801073C6_DA3B6_Debug[gPlayers[i].character], 0.0f, D_80107460_DA450_Debug[i], 0.0f);
+                    D_80107460_DA450_Debug[i] += 1.0f;
+                    if (D_80107460_DA450_Debug[i] >= 360.0f) {
+                        D_80107460_DA450_Debug[i] -= 360.0f;
+                    }
+                    temp_s0_3 = (D_801073BC_DA3AC_Debug[i] != 0) ? 0xF : 0xC;
+                    sprintf(D_80101080_101C80, D_801069B4_D99A4_Debug[gPlayers[i].character]);
+                    func_80105B5C_D8B4C_Debug((i * 0x38 + 0x38), 0x90U, D_80101080_101C80, temp_s0_3, temp_s0_3 - 8);
+                    if ((D_80107470_DA460_Debug[i] & 0x10) && (D_801073BC_DA3AC_Debug[i] == 0)) {
+                        D_801073BC_DA3AC_Debug[i] = 1;
+                        func_80029B80_2A780(D_801073C6_DA3B6_Debug[gPlayers[i].character], D_801073E4_DA3D4_Debug[gPlayers[i].character]);
+                        func_80029E80_2AA80(D_801073C6_DA3B6_Debug[gPlayers[i].character], 1, 0);
+                        func_80029E80_2AA80(D_801073C6_DA3B6_Debug[gPlayers[i].character], 2, 2);
+                        func_80105964_D8954_Debug(2);
+                    } else if (D_80107470_DA460_Debug[i] & 0x20) {
+                        if (D_801073BC_DA3AC_Debug[i] == 1) {
+                            D_801073BC_DA3AC_Debug[i] = 0;
+                            func_80029B80_2A780(D_801073C6_DA3B6_Debug[gPlayers[i].character], D_801073D8_DA3C8_Debug[gPlayers[i].character]);
+                            func_80029E80_2AA80(D_801073C6_DA3B6_Debug[gPlayers[i].character], 1, 0);
+                            func_80029E80_2AA80(D_801073C6_DA3B6_Debug[gPlayers[i].character], 2, 2);
+                            func_80105964_D8954_Debug(3);
+                        }
+                    }
+                    if (D_801073BC_DA3AC_Debug[i] == 0) {
+                        if (D_80107470_DA460_Debug[i] & 4) {
+                            var_s1 = gPlayers[i].character - 1;
+                            func_80105964_D8954_Debug(0);
+
+                            while (1) {
+                                if (var_s1 < 0) {
+                                    var_s1 = 5;
+                                }
+                                if (D_801073C0_DA3B0_Debug[var_s1] == 0) {
+                                    break;
+                                }
+                                var_s1--;
+                            }
+                        } else if (D_80107470_DA460_Debug[i] & 8) {
+                            var_s1 = gPlayers[i].character + 1;
+                            func_80105964_D8954_Debug(0);
+
+                            while (1) {
+                                if (var_s1 > 5) {
+                                    var_s1 = 0;
+                                }
+                                if (D_801073C0_DA3B0_Debug[var_s1] == 0) {
+                                    break;
+                                }
+                                var_s1++;
+                            }
+                        } else {
+                            continue;
+                        }
+
+                        D_801073C0_DA3B0_Debug[gPlayers[i].character] = 0;
+                        func_800298A4_2A4A4(D_801073C6_DA3B6_Debug[gPlayers[i].character], 4, 4);
+                        gPlayers[i].character = var_s1;
+                        D_801073C0_DA3B0_Debug[gPlayers[i].character] = 1;
+                        D_80107460_DA450_Debug[i] = 0.0f;
+                    }
+                }
+            }
+        }
+    }
+}
 
 void func_80105964_D8954_Debug(u16 arg0) {
     func_800795D8_7A1D8(func_8007959C_7A19C(D_80106920_D9910_Debug[arg0].unk_00), D_80106920_D9910_Debug[arg0].unk_02);
