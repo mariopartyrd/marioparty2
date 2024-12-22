@@ -86,6 +86,7 @@ INCLUDE_ASM(const s32, "overlays/ovl_6D_FinalMinigameCoaster/406640", func_80105
 INCLUDE_ASM(const s32, "overlays/ovl_6D_FinalMinigameCoaster/406640", func_80105CE8_409B28_FinalMinigameCoaster);
 
 void func_80105EC0_409D00_FinalMinigameCoaster(void) {
+    s16 id;
     if (func_8008F618_90218() == 0) {
         if (D_801062A0_40A0E0_FinalMinigameCoaster != 0) {
             func_80075424_76024(0);
@@ -102,7 +103,8 @@ void func_80105EC0_409D00_FinalMinigameCoaster(void) {
             _SetFlag(0xE);
             D_800CD2C4_CDEC4++;
             func_80067E6C_68A6C(0x27);
-            omOvlCallEx(func_8003F6F0_402F0(D_800F93A8.unk_20), 0, 0x94);
+            id = func_8003F6F0_402F0(D_800F93A8.unk_20);
+            omOvlCallEx(id, 0, 0x94);
             omOvlHisChg(1, 0x6D, 1, 0x192);
             return;
         }

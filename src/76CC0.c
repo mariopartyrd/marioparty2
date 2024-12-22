@@ -1,11 +1,5 @@
 #include "common.h"
 
-typedef struct omOvlHisData { //Object Manager History Data
-/* 0x00 */ s32 overlayID;
-/* 0x04 */ s16 event;
-/* 0x06 */ u16 stat;
-} omOvlHisData; //sizeof 0x08
-
 extern s16 D_800FA660_FB260[];
 extern s16 D_800CD430_CE030;
 extern u16 D_800F9562_FA162;
@@ -15,8 +9,6 @@ extern u16 D_80102702_103302;
 extern s8 D_800CD412_CE012;
 extern u16 D_800E2130_E2D30;
 extern u16 D_800F93A0_F9FA0;
-extern s16 omovlhisidx;
-extern omOvlHisData omovlhis[12];
 extern u8 D_800CD360_CDF60[][2];
 extern u8 D_800CD3F0_CDFF0[][2];
 extern u16 D_800CD404_CE004;

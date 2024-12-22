@@ -524,7 +524,6 @@ void func_80104FA4_D7F94_Debug(omObjData* obj) {
 }
 
 //used after minigame is selected, character select is on screen
-
 void func_80104FB4_D7FA4_Debug(omObjData * obj) {
     UnkDebug6 sp18;
     s16 temp_s0_3;

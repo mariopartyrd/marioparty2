@@ -35,7 +35,7 @@ void func_80062BE0_637E0(void);
 void HuPrcSleep(s32);
 void func_800114E8_120E8(s16, s32);
 // s16 func_8003F6F0_402F0(s16);
-void func_80062A70_63670(s32, s16, s32);
+void func_80062A70_63670(s32, s16, s16);
 void func_80062CC0_638C0(void);
 void func_80063178_63D78(void);
 void func_80063844_64444(void);

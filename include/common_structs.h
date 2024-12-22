@@ -45,6 +45,12 @@ typedef struct UnkBoardStatus {
     s16 unk_26;
 } UnkBoardStatus; //sizeof 0x28
 
+typedef struct omOvlHisData { //Object Manager History Data
+/* 0x00 */ s32 overlayID;
+/* 0x04 */ s16 event;
+/* 0x06 */ u16 stat;
+} omOvlHisData; //sizeof 0x08
+
 typedef struct GW_PLAYER {
 /* 0x00 */ u8 group; //for which group you belong to in a minigame
 /* 0x01 */ u8 cpu_difficulty;

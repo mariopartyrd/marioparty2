@@ -9,8 +9,33 @@ extern u16 D_800FA654_FB254;
 extern u16 D_800FC878_FD478;
 extern s16 starBlockSpaceIndex;
 extern s16 prevStarBlockSpaceIndexes[10];
+extern s32 D_800CCC1C_CD81C[];
+extern s16 D_800E1F52_E2B52;
+extern omOvlHisData D_800E1F58_E2B58[];
 
-INCLUDE_ASM(const s32, "63670", func_80062A70_63670);
+void func_80062A70_63670(s32 arg0, s16 arg1, s16 arg2) {
+    omOvlHisData* temp_v1;
+    temp_v1 = &D_800E1F58_E2B58[D_800E1F52_E2B52++];
+    
+    switch (arg0) {
+    case -1:
+        arg0 = omovlhis[omovlhisidx].overlayID;
+        temp_v1->overlayID = arg0;
+        break;
+    case -2:
+        arg0 = D_800CCC1C_CD81C[D_800F93A8.unk_02];
+        temp_v1->overlayID = arg0;
+        break;
+    default:
+        temp_v1->overlayID = arg0;
+    }
+    
+    temp_v1->event = arg1;
+    temp_v1->stat = arg2;
+    if (D_800E1F52_E2B52 >= 5) {
+        D_800E1F52_E2B52 = 4;
+    }
+}
 
 INCLUDE_ASM(const s32, "63670", func_80062B14_63714);
 
@@ -63,7 +88,6 @@ extern s16 D_800F64B0_F70B0;
 extern s16 D_800F93C8_F9FC8;
 extern s16 D_800FA652_FB252;
 extern u16 D_801011FC_101DFC;
-
 s16 func_8003F6F0_402F0(s16);
 
 void func_80063950_64550(void) {
