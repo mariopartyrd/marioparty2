@@ -3,7 +3,4 @@
 
 #include "PR/os.h"
 
-typedef s32 (*HuSiFuncVoid)(void);
-typedef s32 (*HuSiFunc)(void *);
-
 #endif

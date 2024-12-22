@@ -5,7 +5,7 @@
 #include "common_structs.h"
 #include "process.h"
 
-s32 func_8007EE0C_7FA0C(unkfunc_8007EE0C* arg0, void* GetEepType, UnkEep** arg2, s32 arg3);
+s32 func_8007EE0C_7FA0C(unkfunc_8007EE0C* arg0, void* GetEepType, char* arg2, s32 arg3);
 u8 rand8(void);
 void func_80062B14_63714(void);
 s32 _CheckFlag(s32);

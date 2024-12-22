@@ -166,6 +166,8 @@ osEPiStartDma = 0x8009DC00; //rom:0x9E800
 osCreatePiManager = 0x8009D7C0; //rom:0x9E3C0
 osCartRomInit = 0x8009DCA0; //rom:0x9E8A0
 Hu3DModelCreate = 0x80027884; //rom:0x28484
+_WriteEeprom = 0x8001AF0C; //rom:0x1BB0C
+_ReadEeprom = 0x8001B014; //rom:0x1BC14
 
 //data and bss
 _ovltbl = 0x800C8874; // rom:0xC9474 size:0x1050

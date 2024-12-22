@@ -15,7 +15,7 @@ void func_80103C5C_40B78C_MinigameCoaster(void);
 void func_80103D34_40B864_MinigameCoaster(void);
 void func_80103360_40AE90_MinigameCoaster(void);
 void func_80103C18_40B748_MinigameCoaster(void);
-extern s32 D_80103E00_40B930_MinigameCoaster[];
+extern void* D_80103E00_40B930_MinigameCoaster[];
 
 extern u8 D_01164160[]; //?
 

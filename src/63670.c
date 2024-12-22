@@ -1,5 +1,15 @@
 #include "common.h"
 
+s16 func_80055900_56500(u8);
+void func_8004CA14_4D614(s32, s32);
+void func_8006135C_61F5C(s32, s32, s32);
+extern s16 coinBlockSpaceIndex;
+extern s16 prevCoinBlockSpaceIndexes[10];
+extern u16 D_800FA654_FB254;
+extern u16 D_800FC878_FD478;
+extern s16 starBlockSpaceIndex;
+extern s16 prevStarBlockSpaceIndexes[10];
+
 INCLUDE_ASM(const s32, "63670", func_80062A70_63670);
 
 INCLUDE_ASM(const s32, "63670", func_80062B14_63714);
@@ -142,15 +152,32 @@ INCLUDE_ASM(const s32, "63670", func_80064200_64E00);
 
 INCLUDE_ASM(const s32, "63670", func_800645C8_651C8);
 
-INCLUDE_ASM(const s32, "63670", func_80064C98_65898);
+void func_80064C98_65898(void) {
+    s32 var_a0;
+    s32 var_s2;
+    s32 i;
 
-s16 func_80055900_56500(u8);
-extern s16 coinBlockSpaceIndex;
-extern s16 prevCoinBlockSpaceIndexes[10];
-extern u16 D_800FA654_FB254;
-extern u16 D_800FC878_FD478;
-extern s16 starBlockSpaceIndex;
-extern s16 prevStarBlockSpaceIndexes[10];
+    var_s2 = -1;
+    var_a0 = 0;
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        if (var_a0 < gPlayers[i].coins_mg_bonus) {
+            var_s2 = i;
+            var_a0 = gPlayers[i].coins_mg_bonus;
+        }
+    }
+
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        if (gPlayers[i].coins_mg_bonus != 0) {
+            func_8004CA14_4D614(i, gPlayers[i].coins_mg_bonus);
+            if (var_s2 == i) {
+                func_8006135C_61F5C(i, gPlayers[i].coins_mg_bonus, 1);
+            } else {
+                func_8006135C_61F5C(i, gPlayers[i].coins_mg_bonus, 0);    
+            }            
+        }
+    }
+    HuPrcSleep(30);
+}
 
 void func_80064DA8_659A8(void) {
     s32 i;
@@ -159,7 +186,7 @@ void func_80064DA8_659A8(void) {
         while (coinBlockSpaceIndex == -1 || coinBlockSpaceIndex == starBlockSpaceIndex) {
             coinBlockSpaceIndex = func_80055900_56500(D_800FC878_FD478);
             D_800FC878_FD478 += 1;
-            for (i = 0; i < 10; i++) {
+            for (i = 0; i < ARRAY_COUNT(prevCoinBlockSpaceIndexes); i++) {
                 if (coinBlockSpaceIndex == prevCoinBlockSpaceIndexes[i]) {
                     break;
                 }
@@ -171,7 +198,7 @@ void func_80064DA8_659A8(void) {
         while (starBlockSpaceIndex == -1 || coinBlockSpaceIndex == starBlockSpaceIndex) {
             starBlockSpaceIndex = func_80055900_56500(D_800FA654_FB254);
             D_800FA654_FB254 += 1;
-            for (i = 0; i < 10; i++) {
+            for (i = 0; i < ARRAY_COUNT(prevStarBlockSpaceIndexes); i++) {
                 if (starBlockSpaceIndex == prevStarBlockSpaceIndexes[i]) {
                     break;
                 }

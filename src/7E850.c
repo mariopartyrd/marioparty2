@@ -76,7 +76,7 @@ INCLUDE_ASM(const s32, "7E850", func_8007ECD0_7F8D0);
 
 INCLUDE_ASM(const s32, "7E850", func_8007ED44_7F944);
 
-s32 func_8007EE0C_7FA0C(unkfunc_8007EE0C* arg0, void* GetEepType, UnkEep** arg2, s32 arg3) {
+s32 func_8007EE0C_7FA0C(unkfunc_8007EE0C* arg0, void* GetEepType, char* arg2, s32 arg3) {
     OSMesgQueue sp10;
     OSMesg sp28;
 
