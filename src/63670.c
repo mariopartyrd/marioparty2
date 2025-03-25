@@ -215,7 +215,7 @@ void func_80064DA8_659A8(void) {
                     break;
                 }
             }
-            if (i != 0xA) {
+            if (i != ARRAY_COUNT(prevCoinBlockSpaceIndexes)) {
                 coinBlockSpaceIndex = -1;
             }
         }
@@ -227,7 +227,7 @@ void func_80064DA8_659A8(void) {
                     break;
                 }
             }
-            if (i != 0xA) {
+            if (i != ARRAY_COUNT(prevStarBlockSpaceIndexes)) {
                 starBlockSpaceIndex = -1;
             }
         }

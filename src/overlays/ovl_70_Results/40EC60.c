@@ -124,7 +124,33 @@ INCLUDE_ASM(const s32, "overlays/ovl_70_Results/40EC60", func_801046DC_410B3C_Re
 
 INCLUDE_ASM(const s32, "overlays/ovl_70_Results/40EC60", func_8010492C_410D8C_Results);
 
-INCLUDE_ASM(const s32, "overlays/ovl_70_Results/40EC60", func_80104B90_410FF0_Results);
+extern s16 D_80107830_413C90_Results[];
+extern s16 D_80107838_413C98_Results[];
+extern s16 D_80107840_413CA0_Results[];
+extern s16 D_80107848_413CA8_Results[];
+extern s16 D_80107860_413CC0_Results[];
+
+void func_80104B90_410FF0_Results(void) {
+    s32 i;
+
+    for (i = 0; i < MAX_PLAYERS; i++) {
+        D_80107860_413CC0_Results[i] = gPlayers[i].coins;
+        D_80107830_413C90_Results[i] =  gPlayers[i].coins_mg_bonus;
+        D_80107838_413C98_Results[i] = gPlayers[i].coins_mg;
+        if ((gPlayers[i].coins + D_80107830_413C90_Results[i] + D_80107838_413C98_Results[i]) > 999) {
+            D_80107830_413C90_Results[i] = 999 - gPlayers[i].coins;
+            D_80107838_413C98_Results[i] = 0;
+        }
+        if ((gPlayers[i].coins + D_80107830_413C90_Results[i] + D_80107838_413C98_Results[i] < 0)) {
+            D_80107830_413C90_Results[i] = -gPlayers[i].coins;
+            D_80107838_413C98_Results[i] = 0;
+        }
+        gPlayers[i].coins_total += gPlayers[i].coins_mg;
+        gPlayers[i].coins_total += gPlayers[i].coins_mg_bonus;
+        D_80107840_413CA0_Results[i] = gPlayers[i].coins_mg_bonus;
+        D_80107848_413CA8_Results[i] = gPlayers[i].coins_mg;
+    }
+}
 
 INCLUDE_ASM(const s32, "overlays/ovl_70_Results/40EC60", func_80104D3C_41119C_Results);
 
