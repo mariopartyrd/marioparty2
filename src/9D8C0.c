@@ -1,11 +1,13 @@
 #include "common.h"
 
-INCLUDE_ASM(const s32, "9D8C0", func_8009CCC0_9D8C0);
+INCLUDE_ASM(const s32, "9D8C0", __osExceptionPreamble);
 
-INCLUDE_ASM(const s32, "9D8C0", func_8009D444_9E044);
+INCLUDE_ASM(const s32, "9D8C0", __osException);
 
-INCLUDE_ASM(const s32, "9D8C0", func_8009D48C_9E08C);
+INCLUDE_ASM(const s32, "9D8C0", __osEnqueueThread);
 
-INCLUDE_ASM(const s32, "9D8C0", func_8009D630_9E230);
+INCLUDE_ASM(const s32, "9D8C0", __osPopThread);
 
-INCLUDE_ASM(const s32, "9D8C0", func_8009D6A0_9E2A0);
+INCLUDE_ASM(const s32, "9D8C0", __osDisableInt);
+
+INCLUDE_ASM(const s32, "9D8C0", __osRestoreInt);

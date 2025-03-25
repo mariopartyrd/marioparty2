@@ -1,15 +1,15 @@
 #include "common.h"
 
-INCLUDE_ASM(const s32, "AF2E0", func_800AE6E0_AF2E0);
+INCLUDE_ASM(const s32, "AF2E0", __osSumcalc);
 
-INCLUDE_ASM(const s32, "AF2E0", func_800AE714_AF314);
+INCLUDE_ASM(const s32, "AF2E0", __osIdCheckSum);
 
-INCLUDE_ASM(const s32, "AF2E0", func_800AE758_AF358);
+INCLUDE_ASM(const s32, "AF2E0", __osRepairPackId);
 
-INCLUDE_ASM(const s32, "AF2E0", func_800AEA44_AF644);
+INCLUDE_ASM(const s32, "AF2E0", __osCheckPackId);
 
-INCLUDE_ASM(const s32, "AF2E0", func_800AEBA8_AF7A8);
+INCLUDE_ASM(const s32, "AF2E0", __osGetId);
 
-INCLUDE_ASM(const s32, "AF2E0", func_800AED74_AF974);
+INCLUDE_ASM(const s32, "AF2E0", __osCheckId);
 
-INCLUDE_ASM(const s32, "AF2E0", func_800AEE2C_AFA2C);
+INCLUDE_ASM(const s32, "AF2E0", __osPfsRWInode);

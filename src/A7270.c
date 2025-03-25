@@ -1,9 +1,9 @@
 #include "common.h"
 
-INCLUDE_ASM(const s32, "A7270", func_800A6670_A7270);
+INCLUDE_ASM(const s32, "A7270", __osTimerServicesInit);
 
-INCLUDE_ASM(const s32, "A7270", func_800A66C4_A72C4);
+INCLUDE_ASM(const s32, "A7270", __osTimerInterrupt);
 
-INCLUDE_ASM(const s32, "A7270", func_800A6800_A7400);
+INCLUDE_ASM(const s32, "A7270", __osSetTimerIntr);
 
-INCLUDE_ASM(const s32, "A7270", func_800A6860_A7460);
+INCLUDE_ASM(const s32, "A7270", __osInsertTimer);
