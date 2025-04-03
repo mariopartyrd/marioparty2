@@ -10,7 +10,6 @@ void func_8008DACC_8E6CC(s32, char*, s32);
 void func_8008E978_8F578(s16);
 extern s16 D_800CC590_CD190;
 extern s16 D_800F9052_F9C52;
-extern s16 gCurrentPlayerIndex;
 
 INCLUDE_ASM(const s32, "565E0", func_800559E0_565E0);
 
@@ -92,7 +91,7 @@ void func_80056188_56D88(s16 arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 a
         func_8008E978_8F578(temp_v0);
     }
     
-    func_80055A38_56638(temp_v0, gCurrentPlayerIndex);
+    func_80055A38_56638(temp_v0, GwSystem.current_player_index);
 }
 
 void func_80056368_56F68(s16 arg0, u32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5, s32 arg6) {

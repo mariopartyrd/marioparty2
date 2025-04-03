@@ -23,7 +23,7 @@ void func_80062A70_63670(s32 arg0, s16 arg1, s16 arg2) {
         temp_v1->overlayID = arg0;
         break;
     case -2:
-        arg0 = D_800CCC1C_CD81C[D_800F93A8.unk_02];
+        arg0 = D_800CCC1C_CD81C[GwSystem.current_board_index];
         temp_v1->overlayID = arg0;
         break;
     default:
@@ -128,7 +128,7 @@ void func_80063950_64550(void) {
         
         if (D_800E1F94_E2B94 & 0x20) {
             D_800E1F82_E2B82 = 1;
-            if ((D_800F93A8.unk_02 == 5) && (_CheckFlag(0xB) == 0)) {
+            if ((GwSystem.current_board_index == 5) && (_CheckFlag(0xB) == 0)) {
                 func_80062A70_63670(0x61, 0, 0x192);
             }
             func_80062A70_63670(0x52, 0, 0x192);
@@ -145,7 +145,7 @@ void func_80063950_64550(void) {
         D_800CCC10 = 0x67;
         
         if (D_800E1F94_E2B94 & 2) {
-            func_80062A70_63670(func_8003F6F0_402F0(D_800F93A8.unk_20), 0, 0x94);
+            func_80062A70_63670(func_8003F6F0_402F0(GwSystem.unk_20), 0, 0x94);
         }
         
         D_800CCC10 = 0x68;

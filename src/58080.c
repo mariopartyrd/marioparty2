@@ -260,7 +260,7 @@ INCLUDE_ASM(const s32, "58080", func_8005D88C_5E48C);
 INCLUDE_ASM(const s32, "58080", func_8005DA20_5E620);
 
 s16 GetCurrentPlayerIndex(void) {
-    return gCurrentPlayerIndex;
+    return GwSystem.current_player_index;
 }
 
 INCLUDE_ASM(const s32, "58080", BoardPlayerGet);

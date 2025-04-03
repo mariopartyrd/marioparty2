@@ -126,7 +126,6 @@ extern u8 D_80107470_DA460_Debug[];
 extern u16 D_80107406_DA3F6_Debug;
 extern u32 D_800CD408_CE008;
 extern UnkDebug0 D_800CD438_CE038[];
-extern s8 D_800F93CD_F9FCD;
 extern UnkDebug1* D_800FC834_FD434;
 extern s16 D_801073C6_DA3B6_Debug[];
 extern s16 D_801073D8_DA3C8_Debug[];
@@ -175,7 +174,7 @@ void func_80102800_D57F0_Debug(void) {
     
     D_80107400_DA3F0_Debug = 0;
     _SetFlag(0x19);
-    D_800F93CD_F9FCD = 0;
+    GwSystem.unk_25 = 0;
     if (D_800CD408_CE008 < 0x47U) {
         //award players coins collected during minigame
         for (i = 0; i < 4; i++) {
@@ -539,15 +538,15 @@ void func_80104FB4_D7FA4_Debug(omObjData * obj) {
         if (func_8008F618_90218() == 0) {
             func_800794A8_7A0A8(0x28);
             func_80105C50_D8C40_Debug();
-            D_800F93A8.unk_20 = debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].overlayID;
-            D_800F93A8.unk_1E = 0;
+            GwSystem.unk_20 = debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].overlayID;
+            GwSystem.current_player_index = 0;
             if (((D_800CD40E == 0) || (D_800CD40E == 2))) {
                 if (D_800CD40E == 0) {
                     _ClearFlag(0xC);
                 } else {
                     _SetFlag(0xC);
                 }
-                omOvlCallEx(func_8003F6F0_402F0(D_800F93A8.unk_20), 0, 0x84); // intentionally implicit
+                omOvlCallEx(func_8003F6F0_402F0(GwSystem.unk_20), 0, 0x84); // intentionally implicit
                 return;
             }
             if (D_800CD40E == 1) {

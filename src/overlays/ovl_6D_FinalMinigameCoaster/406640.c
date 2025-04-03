@@ -31,7 +31,7 @@ extern s32 D_801062A0_40A0E0_FinalMinigameCoaster;
 extern s32 D_801062A4_40A0E4_FinalMinigameCoaster;
 
 void func_80102800_406640_FinalMinigameCoaster(void) {
-    D_800F93A8.unk_02 = 7;
+    GwSystem.current_board_index = 7;
     omInitObjMan(50, 20);
     func_80106160_409FA0_FinalMinigameCoaster();
     func_80106018_409E58_FinalMinigameCoaster();
@@ -103,7 +103,7 @@ void func_80105EC0_409D00_FinalMinigameCoaster(void) {
             _SetFlag(0xE);
             D_800CD2C4_CDEC4++;
             func_80067E6C_68A6C(0x27);
-            id = func_8003F6F0_402F0(D_800F93A8.unk_20);
+            id = func_8003F6F0_402F0(GwSystem.unk_20);
             omOvlCallEx(id, 0, 0x94);
             omOvlHisChg(1, 0x6D, 1, 0x192);
             return;

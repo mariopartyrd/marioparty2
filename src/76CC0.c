@@ -162,8 +162,8 @@ void omOvlGotoEx(s32 arg0, s16 arg1, u16 arg2) {
 
     if (!(arg2 & 0x2000)) {
         if (arg2 & 2) {
-            var_a0_3 = D_800CD3F0_CDFF0[D_800F93A8.unk_02][0];
-            var_v1_2 = D_800CD3F0_CDFF0[D_800F93A8.unk_02][1];
+            var_a0_3 = D_800CD3F0_CDFF0[GwSystem.current_board_index][0];
+            var_v1_2 = D_800CD3F0_CDFF0[GwSystem.current_board_index][1];
             var_v0_3 = arg2 & 0x100;
         } else if (arg2 & 4) {
             var_a0_3 = 1;

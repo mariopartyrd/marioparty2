@@ -20,7 +20,7 @@ extern void* D_80103E00_40B930_MinigameCoaster[];
 extern u8 D_01164160[]; //?
 
 void func_80102800_40A330(void) {
-    D_800F93A8.unk_02 = 7;
+    GwSystem.current_board_index = 7;
     omInitObjMan(50, 10);
     func_80103D34_40B864_MinigameCoaster();
     func_80103C5C_40B78C_MinigameCoaster();

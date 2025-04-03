@@ -34,16 +34,23 @@ typedef struct board_overlay_entrypoint {
     void (*fn)();
 } board_overlay_entrypoint;
 
-typedef struct UnkBoardStatus {
-    char unk0[2];
-    s16 unk_02;
-    char unk4[0x1A];
-    s16 unk_1E;
-    s16 unk_20;
-    s16 unk_22;
-    s16 unk_24;
-    s16 unk_26;
-} UnkBoardStatus; //sizeof 0x28
+typedef struct GW_SYSTEM {
+    /* 0x00 - 800F93A8 */ s16 unk_00;
+    /* 0x02 - 800F93AA */ s16 current_board_index;
+    /* 0x04 - 800F93AC */ s16 current_game_length; // 00=Lite Play,01=Standard Play,02=Full Play,03=Custom Play
+    /* 0x06 - 800F93AE */ s16 total_turns;
+    /* 0x08 - 800F93B0 */ s16 current_turn;
+    /* 0x0A - 800F93B2 */ s16 unk_0A;
+    /* 0x0C - 800F93B4 */ s16 star_spawn_indices[7];
+    /* 0x1A - 800F93C2 */ s16 unk_1A;
+    /* 0x1C - 800F93C4 */ s16 unk_1C;
+    /* 0x1E - 800F93C6 */ s16 current_player_index;
+    /* 0x20 - 800F93C8 */ s16 unk_20;
+    /* 0x22 - 800F93CA */ s16 curPlayerAbsSpaceIndex;
+    /* 0x24 - 800F93CC */ char unk_24[1];
+    /* 0x25 - 800F93CD */ s8 unk_25;
+    /* 0x26 - 800F93CE */ char unk_26[2];
+} GW_SYSTEM; //sizeof 0x28?
 
 typedef struct omOvlHisData { //Object Manager History Data
 /* 0x00 */ s32 overlayID;
