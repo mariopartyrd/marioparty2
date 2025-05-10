@@ -172,7 +172,14 @@ void omOvlGotoEx(s32 arg0, s16 arg1, u16 arg2) {
         D_800CD528_CE128 = var_a0_3 & 0xFF;
     }
 
-    if (((((arg0 - 0x5A) < 2U) || (arg0 == 0x5C)) || ((arg0 == 0x5D) || (arg0 == 0x62)) || (arg0 == 0x58))) {
+    if (
+    (arg0 == 0x5A) || 
+    (arg0 == 0x5B) || 
+    (arg0 == 0x5C) || 
+    (arg0 == 0x5D) || 
+    (arg0 == 0x62) || 
+    (arg0 == 0x58))
+    {
         D_800CD52C_CE12C = 1;
         return;
     }
