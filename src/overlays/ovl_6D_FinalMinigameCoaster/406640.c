@@ -10,7 +10,6 @@ typedef struct Unk_800FD8A8 {
 extern Unk_800FD8A8 D_800FD8A8_FE4A8;
 extern s16 D_800CD414_CE014;
 extern s32 D_800CD2C4_CDEC4;
-extern s16 D_800F93C8_F9FC8;
 void func_8005E584_5F184(void);
 void func_80067E6C_68A6C(s32);
 void func_800740AC_74CAC(void);

@@ -25,7 +25,7 @@ void func_80088640_89240(void);
 void func_8008CE5C_8DA5C(void);
 
 void omInitObjMan(s32, s32);
-void omOvlGotoEx(s32, s32, u16);
+void omOvlGotoEx(s32 arg0, s16 arg1, u16 arg2);
 void omOvlHisChg(s16 arg0, s32 overlay, s16 event, s16 stat);
 
 void HuPrcVSleep(void); 

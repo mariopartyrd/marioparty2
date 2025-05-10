@@ -175,7 +175,7 @@ void func_80102800_D57F0_Debug(void) {
     D_80107400_DA3F0_Debug = 0;
     _SetFlag(0x19);
     GwSystem.unk_25 = 0;
-    if (D_800CD408_CE008 < 0x47U) {
+    if (D_800CD408_CE008 < 0x47) {
         //award players coins collected during minigame
         for (i = 0; i < 4; i++) {
             s16 totalCoins = gPlayers[i].coins + gPlayers[i].coins_mg;

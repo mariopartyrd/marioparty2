@@ -1,29 +1,5 @@
 #include "common.h"
 
-extern s16 D_800FA660_FB260[];
-extern s16 D_800CD430_CE030;
-extern u16 D_800F9562_FA162;
-extern s16 D_800FCE84_FDA84;
-extern u16 D_800FFDF2_1009F2;
-extern u16 D_80102702_103302;
-extern s8 D_800CD412_CE012;
-extern u16 D_800E2130_E2D30;
-extern u16 D_800F93A0_F9FA0;
-extern u8 D_800CD360_CDF60[][2];
-extern u8 D_800CD3F0_CDFF0[][2];
-extern u16 D_800CD404_CE004;
-extern s32 D_800CD408_CE008;
-extern s16 D_800CD414_CE014;
-extern s16 D_800CD416_CE016;
-extern s8 D_800CD41C_CE01C;
-extern u8 D_800CD434_CE034;
-extern s16 D_800CD528_CE128;
-extern s16 D_800CD52C_CE12C;
-extern u8 D_800F92B2_F9EB2;
-extern s16 D_800F93C8_F9FC8;
-extern s32 D_800FA63C_FB23C;
-extern u16 D_800FA63E_FB23E;
-
 void func_800155B8_161B8(s16, s8);
 void func_80079338_79F38(s32);
 void func_8007935C_79F5C(s16 arg0, s16 arg1, s16 arg2);
@@ -34,7 +10,6 @@ void func_80029708_2A308(s32);
 void func_8002F1A4_2FDA4(void);
 void func_80069698_6A298(void);
 void omDestroyObjMan(void);
-void omOvlGotoEx(s32, s32, u16);
 
 INCLUDE_ASM(const s32, "76CC0", omInitObjMan);
 
@@ -121,7 +96,6 @@ s32 omOvlReturnEx(s16 level) {
     return 1;
 }
 
-#ifdef NON_EQUIVALENT
 void omOvlGotoEx(s32 arg0, s16 arg1, u16 arg2) {
     u8 var_a0_3;
     u8 var_v1_2;
@@ -148,13 +122,9 @@ void omOvlGotoEx(s32 arg0, s16 arg1, u16 arg2) {
         func_80079338_79F38(3);
     }
 
-    if (arg2 & 1) {
-        if (D_800FFDF2_1009F2 == 0x1000 && (D_800F9562_FA162 == 0x2004) && (D_80102702_103302 == 0x180)) {
-            func_8007935C_79F5C(0x1000, 0x2000, 0x180); //this line is incorrect
-        } else {
-            func_8007935C_79F5C(0x1000, 0x2004, 0x180); //maybe this as well
-        }
-    } else if ((arg2 & 2) && (D_800FFDF2_1009F2 != 0x800 || (D_800F9562_FA162 == 0x1000) && (D_80102702_103302 != 0x180))) {
+    if ((arg2 & 1) && (D_800FFDF2_1009F2 != 0x1000 || (D_800F9562_FA162 != 0x2004) || (D_80102702_103302 != 0x180))) {
+        func_8007935C_79F5C(0x1000, 0x2004, 0x180);
+    } else if ((arg2 & 2) && (D_800FFDF2_1009F2 != 0x800 || (D_800F9562_FA162 != 0x1000) || (D_80102702_103302 != 0x180))) {
         func_8007935C_79F5C(0x800, 0x1000, 0x180);
     } else if (arg2 & 4 && (D_800FFDF2_1009F2 != 0x1000 || (D_800F9562_FA162 != 0x2004) || (D_80102702_103302 != 0x180))) {
         func_8007935C_79F5C(0x1000, 0x2004, 0x180);
@@ -171,8 +141,8 @@ void omOvlGotoEx(s32 arg0, s16 arg1, u16 arg2) {
                 var_v1_2 = 0x14;
                 var_v0_3 = arg2 & 0x100;
             } else {
-                var_a0_3 = D_800CD360_CDF60[D_800F93C8_F9FC8 - 1][0];
-                var_v1_2 = D_800CD360_CDF60[D_800F93C8_F9FC8 - 1][1];
+                var_a0_3 = D_800CD360_CDF60[GwSystem.unk_20 - 1][0];
+                var_v1_2 = D_800CD360_CDF60[GwSystem.unk_20 - 1][1];
                 var_v0_3 = arg2 & 0x100;
             }
         } else {
@@ -208,9 +178,6 @@ void omOvlGotoEx(s32 arg0, s16 arg1, u16 arg2) {
     }
     D_800CD52C_CE12C = 0;
 }
-#else
-INCLUDE_ASM(const s32, "76CC0", omOvlGotoEx);
-#endif
 
 void omOvlHisChg(s16 arg0, s32 overlay, s16 event, s16 stat) {
     s32 ovlhisIndex = omovlhisidx - arg0;
