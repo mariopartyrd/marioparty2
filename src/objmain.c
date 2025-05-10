@@ -1,6 +1,5 @@
 #include "common.h"
 
-void func_800155B8_161B8(s16, s8);
 void func_80079338_79F38(s32);
 void func_8007935C_79F5C(s16 arg0, s16 arg1, s16 arg2);
 void func_8001A4C0_1B0C0(void);
@@ -11,61 +10,61 @@ void func_8002F1A4_2FDA4(void);
 void func_80069698_6A298(void);
 void omDestroyObjMan(void);
 
-INCLUDE_ASM(const s32, "76CC0", omInitObjMan);
+INCLUDE_ASM(const s32, "objmain", omInitObjMan);
 
-INCLUDE_ASM(const s32, "76CC0", omDestroyObjMan);
+INCLUDE_ASM(const s32, "objmain", omDestroyObjMan);
 
-INCLUDE_ASM(const s32, "76CC0", omAddObj);
+INCLUDE_ASM(const s32, "objmain", omAddObj);
 
-INCLUDE_ASM(const s32, "76CC0", omSetObjPrio);
+INCLUDE_ASM(const s32, "objmain", omSetObjPrio);
 
-INCLUDE_ASM(const s32, "76CC0", omInsertObj);
+INCLUDE_ASM(const s32, "objmain", omInsertObj);
 
-INCLUDE_ASM(const s32, "76CC0", omDelObj);
+INCLUDE_ASM(const s32, "objmain", omDelObj);
 
-INCLUDE_ASM(const s32, "76CC0", omSetStat);
+INCLUDE_ASM(const s32, "objmain", omSetStat);
 
-INCLUDE_ASM(const s32, "76CC0", omSetStatBit);
+INCLUDE_ASM(const s32, "objmain", omSetStatBit);
 
-INCLUDE_ASM(const s32, "76CC0", omResetStatBit);
+INCLUDE_ASM(const s32, "objmain", omResetStatBit);
 
-INCLUDE_ASM(const s32, "76CC0", omPrcSetStat);
+INCLUDE_ASM(const s32, "objmain", omPrcSetStat);
 
-INCLUDE_ASM(const s32, "76CC0", omPrcSetStatBit);
+INCLUDE_ASM(const s32, "objmain", omPrcSetStatBit);
 
-INCLUDE_ASM(const s32, "76CC0", omPrcResetStatBit);
+INCLUDE_ASM(const s32, "objmain", omPrcResetStatBit);
 
-INCLUDE_ASM(const s32, "76CC0", omSetTra);
+INCLUDE_ASM(const s32, "objmain", omSetTra);
 
-INCLUDE_ASM(const s32, "76CC0", omSetRot);
+INCLUDE_ASM(const s32, "objmain", omSetRot);
 
-INCLUDE_ASM(const s32, "76CC0", omSetSca);
+INCLUDE_ASM(const s32, "objmain", omSetSca);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076BD0_777D0);
+INCLUDE_ASM(const s32, "objmain", func_80076BD0_777D0);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076CA0_778A0);
+INCLUDE_ASM(const s32, "objmain", func_80076CA0_778A0);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076D10_77910);
+INCLUDE_ASM(const s32, "objmain", func_80076D10_77910);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076D80_77980);
+INCLUDE_ASM(const s32, "objmain", func_80076D80_77980);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076D98_77998);
+INCLUDE_ASM(const s32, "objmain", func_80076D98_77998);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076DC0_779C0);
+INCLUDE_ASM(const s32, "objmain", func_80076DC0_779C0);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076E20_77A20);
+INCLUDE_ASM(const s32, "objmain", func_80076E20_77A20);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076E54_77A54);
+INCLUDE_ASM(const s32, "objmain", func_80076E54_77A54);
 
-INCLUDE_ASM(const s32, "76CC0", omAddPrcObj);
+INCLUDE_ASM(const s32, "objmain", omAddPrcObj);
 
-INCLUDE_ASM(const s32, "76CC0", func_80076F14_77B14);
+INCLUDE_ASM(const s32, "objmain", func_80076F14_77B14);
 
-INCLUDE_ASM(const s32, "76CC0", omDelPrcObj);
+INCLUDE_ASM(const s32, "objmain", omDelPrcObj);
 
-INCLUDE_ASM(const s32, "76CC0", omDestroyPrcObj);
+INCLUDE_ASM(const s32, "objmain", omDestroyPrcObj);
 
-INCLUDE_ASM(const s32, "76CC0", omPrcSetDestructor);
+INCLUDE_ASM(const s32, "objmain", omPrcSetDestructor);
 
 s32 omOvlCallEx(s32 overlayID, s16 event, s16 stat) {
     omOvlHisData* history;
@@ -210,25 +209,25 @@ void omOvlKill(void) {
     func_80029708_2A308(1);
 }
 
-INCLUDE_ASM(const s32, "76CC0", omMain);
+INCLUDE_ASM(const s32, "objmain", omMain);
 
-INCLUDE_ASM(const s32, "76CC0", func_80077EF0_78AF0);
+INCLUDE_ASM(const s32, "objmain", func_80077EF0_78AF0);
 
-INCLUDE_ASM(const s32, "76CC0", func_80077F50_78B50);
+INCLUDE_ASM(const s32, "objmain", func_80077F50_78B50);
 
-INCLUDE_ASM(const s32, "76CC0", func_80078A08_79608);
+INCLUDE_ASM(const s32, "objmain", func_80078A08_79608);
 
-INCLUDE_ASM(const s32, "76CC0", func_80078EA8_79AA8);
+INCLUDE_ASM(const s32, "objmain", func_80078EA8_79AA8);
 
-INCLUDE_ASM(const s32, "76CC0", func_80078EC8_79AC8);
+INCLUDE_ASM(const s32, "objmain", func_80078EC8_79AC8);
 
-INCLUDE_ASM(const s32, "76CC0", func_80078FF8_79BF8);
+INCLUDE_ASM(const s32, "objmain", func_80078FF8_79BF8);
 
-INCLUDE_ASM(const s32, "76CC0", func_80079128_79D28);
+INCLUDE_ASM(const s32, "objmain", func_80079128_79D28);
 
-INCLUDE_ASM(const s32, "76CC0", func_80079294_79E94);
+INCLUDE_ASM(const s32, "objmain", func_80079294_79E94);
 
-INCLUDE_ASM(const s32, "76CC0", func_80079338_79F38);
+INCLUDE_ASM(const s32, "objmain", func_80079338_79F38);
 
 void func_8007935C_79F5C(s16 arg0, s16 arg1, s16 arg2) {
     D_800FFDF2_1009F2 = arg0;
@@ -237,66 +236,3 @@ void func_8007935C_79F5C(s16 arg0, s16 arg1, s16 arg2) {
     D_800CD430_CE030 = 1;
     D_800FCE84_FDA84 = 4;
 }
-
-INCLUDE_ASM(const s32, "76CC0", PlayMusic);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079428_7A028);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079464_7A064);
-
-INCLUDE_ASM(const s32, "76CC0", func_800794A8_7A0A8);
-
-INCLUDE_ASM(const s32, "76CC0", func_800794F0_7A0F0);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079518_7A118);
-
-INCLUDE_ASM(const s32, "76CC0", func_8007954C_7A14C);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079574_7A174);
-
-INCLUDE_ASM(const s32, "76CC0", func_8007959C_7A19C);
-
-void func_800795D8_7A1D8(s16 index, s8 val) {
-    D_800FA660_FB260[index] = val;
-    func_800155B8_161B8(index, val);
-}
-
-INCLUDE_ASM(const s32, "76CC0", func_80079614_7A214);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079684_7A284);
-
-INCLUDE_ASM(const s32, "76CC0", func_800796F0_7A2F0);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079718_7A318);
-
-INCLUDE_ASM(const s32, "76CC0", func_8007975C_7A35C);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079798_7A398);
-
-INCLUDE_ASM(const s32, "76CC0", func_800797DC_7A3DC);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079848_7A448);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079868_7A468);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079884_7A484);
-
-INCLUDE_ASM(const s32, "76CC0", func_800798D4_7A4D4);
-
-INCLUDE_ASM(const s32, "76CC0", func_800798F8_7A4F8);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079920_7A520);
-
-INCLUDE_ASM(const s32, "76CC0", func_800799A4_7A5A4);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079A70_7A670);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079B88_7A788);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079C60_7A860);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079D10_7A910);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079D7C_7A97C);
-
-INCLUDE_ASM(const s32, "76CC0", func_80079DB4_7A9B4);
