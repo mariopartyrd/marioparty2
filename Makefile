@@ -36,7 +36,7 @@ LD_MAP    := $(BUILD_DIR)/$(TARGET).map
 
 ### Tools ###
 
-PYTHON     := python3
+PYTHON     := venv/bin/python3
 N64CKSUM   := $(PYTHON) tools/n64cksum.py
 SPLAT_YAML := marioparty2.yaml
 SPLAT      := splat split $(SPLAT_YAML)

@@ -1,40 +1,35 @@
 #!/bin/bash
 
-# Function to check if a command exists
-command_exists () {
-    type "$1" &> /dev/null ;
-}
+# Debian and derivatives (apt)
+if cat /etc/os-release | grep -E 'ID=debian|ID_LIKE=(.*)debian' &> /dev/null; then
+    supported=true
 
-# Check if python3 is installed
-if ! command_exists python3; then
-    echo "Python3 is not installed. Installing Python3..."
-    if command_exists apt-get; then
-        sudo apt-get update
-        sudo apt-get install -y python3
-    elif command_exists yum; then
-        sudo yum install -y python3
-    elif command_exists brew; then
-        brew install python
-    else
-        echo "Package manager not found. Please install Python3 manually."
-        exit 1
+    echo "Installing packages for Debian or derivative (apt)"
+
+    sudo apt install python3-venv
+    # Add i386 arch for wine32
+    sudo apt -y install python3-pip
+    sudo apt-get install -y gcc-mips-linux-gnu
+    # Check if requirements.txt exists
+    if [ ! -f "requirements.txt" ]; then
+    echo "requirements.txt not found!"
+    exit 1
     fi
-else
-    echo "Python3 is already installed."
-fi
 
-# Check if pip is installed for python3
-if ! command_exists pip3; then
-    echo "pip3 is not installed. Installing pip3..."
-    python3 -m ensurepip --upgrade
-else
-    echo "pip3 is already installed."
-fi
+    # Create a virtual environment in the 'venv' directory
+    echo "Creating virtual environment..."
+    python3 -m venv venv
 
-# Check if splat is installed
-if ! python3 -m pip show splat64 &> /dev/null; then
-    echo "splat is not installed. Installing splat..."
-    python3 -m pip install git+https://github.com/ethteck/splat.git
-else
-    echo "splat is already installed."
+    # Activate the virtual environment
+    echo "Activating virtual environment..."
+    source venv/bin/activate
+
+    # Install the required dependencies
+    echo "Installing dependencies..."
+    pip install -r requirements.txt
+
+    echo "Setup complete! Virtual environment is ready and dependencies are installed."
+
+    # Keep the virtual environment activated (optional)
+    exec "$SHELL"
 fi

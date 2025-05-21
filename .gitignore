@@ -8,3 +8,4 @@ expected/
 marioparty2.ld
 ctx.c
 __pycache__
+venv/
