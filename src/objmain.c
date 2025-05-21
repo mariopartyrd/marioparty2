@@ -140,8 +140,8 @@ void omOvlGotoEx(s32 arg0, s16 arg1, u16 arg2) {
                 var_v1_2 = 0x14;
                 var_v0_3 = arg2 & 0x100;
             } else {
-                var_a0_3 = D_800CD360_CDF60[GwSystem.unk_20 - 1][0];
-                var_v1_2 = D_800CD360_CDF60[GwSystem.unk_20 - 1][1];
+                var_a0_3 = D_800CD360_CDF60[GwSystem.chosenMinigameIndex - 1][0];
+                var_v1_2 = D_800CD360_CDF60[GwSystem.chosenMinigameIndex - 1][1];
                 var_v0_3 = arg2 & 0x100;
             }
         } else {

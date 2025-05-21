@@ -24,7 +24,6 @@ void func_80106018_409E58_FinalMinigameCoaster(void);
 void func_80106160_409FA0_FinalMinigameCoaster(void);
 void func_80106214_40A054_FinalMinigameCoaster(void);
 void func_80106054_409E94_FinalMinigameCoaster(void);
-s16 func_8003F6F0_402F0(s16);
 
 extern s32 D_801062A0_40A0E0_FinalMinigameCoaster;
 extern s32 D_801062A4_40A0E4_FinalMinigameCoaster;
@@ -85,7 +84,8 @@ INCLUDE_ASM(const s32, "overlays/ovl_6D_FinalMinigameCoaster/406640", func_80105
 INCLUDE_ASM(const s32, "overlays/ovl_6D_FinalMinigameCoaster/406640", func_80105CE8_409B28_FinalMinigameCoaster);
 
 void func_80105EC0_409D00_FinalMinigameCoaster(void) {
-    s16 id;
+    s16 minigameOverlayID;
+
     if (func_8008F618_90218() == 0) {
         if (D_801062A0_40A0E0_FinalMinigameCoaster != 0) {
             func_80075424_76024(0);
@@ -102,8 +102,8 @@ void func_80105EC0_409D00_FinalMinigameCoaster(void) {
             _SetFlag(0xE);
             D_800CD2C4_CDEC4++;
             func_80067E6C_68A6C(0x27);
-            id = func_8003F6F0_402F0(GwSystem.unk_20);
-            omOvlCallEx(id, 0, 0x94);
+            minigameOverlayID = func_8003F6F0_402F0(GwSystem.chosenMinigameIndex);
+            omOvlCallEx(minigameOverlayID, 0, 0x94);
             omOvlHisChg(1, 0x6D, 1, 0x192);
             return;
         }

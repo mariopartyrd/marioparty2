@@ -87,9 +87,10 @@ extern s16 D_800E1FA0_E2BA0;
 extern s16 D_800F64B0_F70B0;
 extern s16 D_800FA652_FB252;
 extern u16 D_801011FC_101DFC;
-s16 func_8003F6F0_402F0(s16);
 
 void func_80063950_64550(void) {
+    s16 minigameOverlayID;
+
     do {
         HuPrcVSleep();
     } while (func_8008F618_90218() != 0);
@@ -144,7 +145,8 @@ void func_80063950_64550(void) {
         D_800CCC10 = 0x67;
         
         if (D_800E1F94_E2B94 & 2) {
-            func_80062A70_63670(func_8003F6F0_402F0(GwSystem.unk_20), 0, 0x94);
+            minigameOverlayID = func_8003F6F0_402F0(GwSystem.chosenMinigameIndex);
+            func_80062A70_63670(minigameOverlayID, 0, 0x94);
         }
         
         D_800CCC10 = 0x68;

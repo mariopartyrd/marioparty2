@@ -45,7 +45,7 @@ typedef struct GW_SYSTEM {
     /* 0x1A - 800F93C2 */ s16 unk_1A;
     /* 0x1C - 800F93C4 */ s16 unk_1C;
     /* 0x1E - 800F93C6 */ s16 current_player_index;
-    /* 0x20 - 800F93C8 */ s16 unk_20;
+    /* 0x20 - 800F93C8 */ s16 chosenMinigameIndex;
     /* 0x22 - 800F93CA */ s16 curPlayerAbsSpaceIndex;
     /* 0x24 - 800F93CC */ char unk_24[1];
     /* 0x25 - 800F93CD */ s8 unk_25;
@@ -178,5 +178,11 @@ typedef struct SpaceData {
 /* 0x14 */ Vec rot;
 /* 0x20 */ void* event_list;
 } SpaceData;
+
+typedef struct UnkomOvl {
+    s32 unk_00;
+    u16 unk_04;
+    char unk_06[2]; //unused pad?
+} UnkomOvl;
 
 #endif

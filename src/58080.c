@@ -298,7 +298,6 @@ INCLUDE_ASM(const s32, "58080", func_8005E228_5EE28);
 GW_PLAYER* BoardPlayerGet(s32);
 
 void func_8005E260_5EE60(s16 playerIndex) {
-    s32 temp_a0;
     GW_PLAYER* temp_v0;
 
     temp_v0 = BoardPlayerGet(playerIndex);

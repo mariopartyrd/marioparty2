@@ -76,7 +76,7 @@ INCLUDE_ASM(const s32, "3D6A0", func_8003F520_40120);
 
 INCLUDE_ASM(const s32, "3D6A0", func_8003F57C_4017C);
 
-s16 func_8003F6F0_402F0(s16 overlayID) {
+s32 func_8003F6F0_402F0(s16 overlayID) {
     s32 explanationOverlayID;
 
     if (overlayID < 30) {
