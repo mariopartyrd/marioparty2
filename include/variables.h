@@ -30,5 +30,10 @@ extern s16 D_800CD52C_CE12C;
 extern u8 D_800F92B2_F9EB2;
 extern s32 D_800FA63C_FB23C;
 extern u16 D_800FA63E_FB23E;
+extern s16 D_800F8D18[];
+extern UnkomOvl D_800CAD90[]; //matches D_800A1920_A2520 in mp3
+extern f32 D_800FA610_FB210;
+extern Vec D_800FD474_FE074;
+extern Vec D_8010274C_10334C;
 
 #endif //_TYPES_H_

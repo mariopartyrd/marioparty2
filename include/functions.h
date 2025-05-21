@@ -63,4 +63,14 @@ void func_8005965C_5A25C(void);
 void func_8005E2B8_5EEB8(void);
 void func_80029E80_2AA80(s16, s32, s32);
 void omDelPrcObj(void*);
+void func_80017800_18400(s32);
+s32 func_8003F6F0_402F0(s16);
+void func_80067EF8_68AF8(s32);
+void func_800727F0_733F0(void);
+void PlayMusic(s16);
+s32 func_80018E78_19A78(void); //get current cam index
+void func_800202DC_20EDC(s32, f32, f32, f32);
+void func_80079E60_7AA60(void);
+void omSetStatBit(omObjData *obj, u16 stat);
+
 #endif

@@ -1,8 +1,59 @@
 #include "common.h"
 
+void func_80102A14_3BE174_name_60(void);
+void func_80102AF0_3BE250_name_60(void);
+void func_801085A0_3C3D00_name_60(s32);
+extern s16 D_801148F2_3D0052_name_60;
+extern s16 D_801148F4_3D0054_name_60;
+extern s16 D_80114AC2_3D0222_name_60;
+
+void func_80105B94_3C12F4_name_60(void);
+
 INCLUDE_ASM(const s32, "overlays/ovl_60_name/3BDF60", func_80102800_3BDF60_name_60);
 
-INCLUDE_ASM(const s32, "overlays/ovl_60_name/3BDF60", func_80102830_3BDF90_name_60);
+void func_80102830_3BDF90_name_60(void) {
+    s32 temp_s0;
+    s32 i;
+
+    func_80102A14_3BE174_name_60();
+    if ((GwSystem.unk_25 == 1)) {
+        func_801085A0_3C3D00_name_60(0);
+        return;
+    }
+
+    switch (D_801148F2_3D0052_name_60) {
+    case 6:
+    case 7:
+        func_801085A0_3C3D00_name_60(0);
+        return;
+    }
+
+    PlayMusic(0x16);
+    omSetStatBit(omAddObj(0x7FDA, 0U, 0U, -1, &func_80079E60_7AA60), 0xA0);
+    func_80018E30_19A30(1);
+    temp_s0 = func_80018E78_19A78();
+    ScissorSet(temp_s0, 0.0f, 0.0f, 320.0f, 240.0f);
+    ViewportSet(temp_s0, 640.0f, 480.0f, 511.0f, 640.0f, 480.0f, 511.0f);
+    func_800202DC_20EDC(0, 10.0f, 500.0f, 5000.0f);
+    D_800FA610_FB210 = 2500.0f;
+    D_800FD474_FE074.x = 0;
+    D_800FD474_FE074.y = 0;
+    D_800FD474_FE074.z = 0;
+    D_8010274C_10334C.x = 0;
+    D_8010274C_10334C.y = 0;
+    D_8010274C_10334C.z = 0;
+    func_80102AF0_3BE250_name_60();
+    omAddPrcObj(&func_80105B94_3C12F4_name_60, 0x1001U, 0x800, 0);
+    
+    for (i = 0; i < 4; i++) {
+        if (gPlayers[i].group == 0) {
+            break;
+        }
+    }
+
+    D_801148F4_3D0054_name_60 = D_80114AC2_3D0222_name_60 = i;
+    InitFadeIn(0, 0x10);
+}
 
 INCLUDE_ASM(const s32, "overlays/ovl_60_name/3BDF60", func_80102A14_3BE174_name_60);
 
@@ -90,7 +141,64 @@ INCLUDE_ASM(const s32, "overlays/ovl_60_name/3BDF60", func_80108170_3C38D0_name_
 
 INCLUDE_ASM(const s32, "overlays/ovl_60_name/3BDF60", func_80108458_3C3BB8_name_60);
 
-INCLUDE_ASM(const s32, "overlays/ovl_60_name/3BDF60", func_801085A0_3C3D00_name_60);
+extern s16 D_801148F0_3D0050_name_60;
+extern s16 D_801148F2_3D0052_name_60;
+extern s16 D_8011497A_3D00DA_name_60;
+extern s32 D_8011497C_3D00DC_name_60;
+extern s32 D_80114980_3D00E0_name_60;
+extern s32 D_80114984_3D00E4_name_60;
+
+void func_801085A0_3C3D00_name_60(s32 arg0) {
+    s16 minigameOverlayID;
+
+    func_8008CE5C_8DA5C();
+    func_800727F0_733F0();
+    func_80067EF8_68AF8(-1);
+    
+    if (arg0 != 0) {
+        func_80017800_18400(D_80114984_3D00E4_name_60);
+        func_80017800_18400(D_8011497C_3D00DC_name_60);
+        func_80017800_18400(D_80114980_3D00E0_name_60);
+        omOvlKill();
+    }
+    
+    if (D_8011497A_3D00DA_name_60 != 0) {
+        omOvlCallEx(D_800CAD90[D_801148F0_3D0050_name_60].unk_00, 0, 0x14);
+        minigameOverlayID = func_8003F6F0_402F0(GwSystem.chosenMinigameIndex);
+        omOvlHisChg(1, minigameOverlayID, 0, 0x14);
+        return;
+    } 
+    
+    _ClearFlag(0x15);
+    if ((_CheckFlag(0x13) != 0) || !(_CheckFlag(0xC) == 0)) {
+        omOvlGotoEx(D_800CAD90[D_801148F0_3D0050_name_60].unk_00, 0, 0x14);
+        return;
+    }
+    
+    switch (D_801148F2_3D0052_name_60) {
+        case 6:
+        case 5:
+        case 4:
+            omOvlGotoEx(D_800CAD90[D_801148F0_3D0050_name_60].unk_00, 0, 0x14);
+            return;
+        case 7:
+            GwSystem.current_board_index = (u16) D_801148F0_3D0050_name_60 - 0x3A;
+            D_800F8D18[2] = 1;
+            D_800F8D18[1] = 0xE;
+            omOvlGotoEx(D_800CAD90[D_801148F0_3D0050_name_60].unk_00, 0, 0x12);
+            return;
+            
+        case 3:
+            omOvlCallEx(D_800CAD90[D_801148F0_3D0050_name_60].unk_00, 0, 0x14);
+            omOvlHisChg(1, 0x6F, 0, 0x14);
+            return;
+    }
+    omOvlCallEx(D_800CAD90[D_801148F0_3D0050_name_60].unk_00, 0, 0x14);
+    omOvlHisChg(1, 0x70, 0, 0x14);
+}
+
+
+
 
 INCLUDE_ASM(const s32, "overlays/ovl_60_name/3BDF60", func_8010879C_3C3EFC_name_60);
 

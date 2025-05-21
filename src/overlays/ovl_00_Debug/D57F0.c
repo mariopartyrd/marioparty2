@@ -538,7 +538,7 @@ void func_80104FB4_D7FA4_Debug(omObjData * obj) {
         if (func_8008F618_90218() == 0) {
             func_800794A8_7A0A8(0x28);
             func_80105C50_D8C40_Debug();
-            GwSystem.unk_20 = debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].overlayID;
+            GwSystem.chosenMinigameIndex = debug_ovl_table[D_801072A0_DA290_Debug * 10 + D_801072A2_DA292_Debug].overlayID;
             GwSystem.current_player_index = 0;
             if (((D_800CD40E == 0) || (D_800CD40E == 2))) {
                 if (D_800CD40E == 0) {
@@ -546,7 +546,7 @@ void func_80104FB4_D7FA4_Debug(omObjData * obj) {
                 } else {
                     _SetFlag(0xC);
                 }
-                omOvlCallEx(func_8003F6F0_402F0(GwSystem.unk_20), 0, 0x84); // intentionally implicit
+                omOvlCallEx(func_8003F6F0_402F0(GwSystem.chosenMinigameIndex), 0, 0x84); // intentionally implicit
                 return;
             }
             if (D_800CD40E == 1) {
