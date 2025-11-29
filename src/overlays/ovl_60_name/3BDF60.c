@@ -1,4 +1,5 @@
 #include "common.h"
+#include "game/data.h"
 
 void func_80102A14_3BE174_name_60(void);
 void func_80102AF0_3BE250_name_60(void);
@@ -144,9 +145,9 @@ INCLUDE_ASM(const s32, "overlays/ovl_60_name/3BDF60", func_80108458_3C3BB8_name_
 extern s16 D_801148F0_3D0050_name_60;
 extern s16 D_801148F2_3D0052_name_60;
 extern s16 D_8011497A_3D00DA_name_60;
-extern s32 D_8011497C_3D00DC_name_60;
-extern s32 D_80114980_3D00E0_name_60;
-extern s32 D_80114984_3D00E4_name_60;
+extern void* D_8011497C_3D00DC_name_60;
+extern void* D_80114980_3D00E0_name_60;
+extern void* D_80114984_3D00E4_name_60;
 
 void func_801085A0_3C3D00_name_60(s32 arg0) {
     s16 minigameOverlayID;
@@ -156,9 +157,9 @@ void func_801085A0_3C3D00_name_60(s32 arg0) {
     func_80067EF8_68AF8(-1);
     
     if (arg0 != 0) {
-        func_80017800_18400(D_80114984_3D00E4_name_60);
-        func_80017800_18400(D_8011497C_3D00DC_name_60);
-        func_80017800_18400(D_80114980_3D00E0_name_60);
+        DataClose(D_80114984_3D00E4_name_60);
+        DataClose(D_8011497C_3D00DC_name_60);
+        DataClose(D_80114980_3D00E0_name_60);
         omOvlKill();
     }
     

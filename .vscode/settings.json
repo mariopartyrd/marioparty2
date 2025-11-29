@@ -4,6 +4,8 @@
         "functions.h": "c",
         "common_structs.h": "c",
         "ultra64.h": "c",
-        "process.h": "c"
+        "process.h": "c",
+        "malloc.h": "c",
+        "memory.h": "c"
     }
 }

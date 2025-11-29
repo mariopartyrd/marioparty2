@@ -1,5 +1,5 @@
 #include "process.h"
-#include "memory.h"
+#include "game/malloc.h"
 
 extern s16 processcnt;
 extern Process* processtop;
@@ -70,7 +70,7 @@ Process* HuPrcCreate(void (*func)(void), u16 priority, u32 stack_size, s32 extra
         + HuMemMemoryAllocSizeGet(stack_size)
         + HuMemMemoryAllocSizeGet(extra_size);
 
-    process_heap = (HeapNode*)HuMemDirectMalloc(alloc_size);
+    process_heap = (HeapNode*)HuMemMemoryAllocPerm(alloc_size);
 
     if (process_heap == NULL) {
         return NULL;
@@ -244,7 +244,7 @@ void HuPrcCall(s32 time) {
     while (1) {
         switch (ret) {
             case 2:
-                HuMemDirectFree(processcur->heap);
+                HuMemMemoryFreePerm(processcur->heap);
                 processcur = processcur->next;
                 break;
             case 1:

@@ -29,27 +29,27 @@ extern s16 gNumOfControllers;
 s16 func_80018ACC_196CC(s32);
 void HuRomDmaCodeRead(u8* src, u8* dest, s32 size);
 s16 Hu3DModelCreate(void*, s32);
-void* ReadMainFS(s32 dirAndFile);
+void* DataRead(s32 dirAndFile);
 void CameraScissorSet(s16, void*);
 void CameraViewportSet(s16, Vec*, Vec*);
-void HuMemDirectFree(void*);
+void HuMemMemoryFreePerm(void*);
 s32 func_80020EBC_21ABC(void*, s32, u8);
 s32 func_8003D8F0_3E4F0(s32, void*, s32, s32);
 
 u16 func_80018A30_19630(s32 arg0, s32 arg1) {
-    return Hu3DModelCreate(ReadMainFS(arg0), arg1);
+    return Hu3DModelCreate(DataRead(arg0), arg1);
 }
 
 u16 func_80018A64_19664(s32 arg0, s32 arg1) {
-    return Hu3DModelCreate(ReadMainFS(arg0), arg1);
+    return Hu3DModelCreate(DataRead(arg0), arg1);
 }
 
 u16 func_80018A98_19698(s32 arg0, s32 arg1) {
-    return Hu3DModelCreate(ReadMainFS(arg0), arg1);
+    return Hu3DModelCreate(DataRead(arg0), arg1);
 }
 
 s16 func_80018ACC_196CC(s32 arg0) {
-    return Hu3DModelCreate(ReadMainFS(arg0), 0x1D);
+    return Hu3DModelCreate(DataRead(arg0), 0x1D);
 }
 
 u8 rand8(void) {
@@ -124,9 +124,9 @@ u16 func_80018D64_19964(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s0;
     void* temp_v0;
 
-    temp_v0 = ReadMainFS(arg0);
+    temp_v0 = DataRead(arg0);
     temp_s0 = func_80020EBC_21ABC(temp_v0, arg1, arg2);
-    HuMemDirectFree(temp_v0);
+    HuMemMemoryFreePerm(temp_v0);
     return temp_s0;
 }
 
@@ -134,8 +134,8 @@ s16 func_80018DC0_199C0(s32 arg0, s32 arg1, s32 arg2) {
     s32 temp_s0;
     void* temp_v0;
 
-    temp_v0 = ReadMainFS(arg1);
+    temp_v0 = DataRead(arg1);
     temp_s0 = func_8003D8F0_3E4F0(arg0, temp_v0, 0, arg2);
-    HuMemDirectFree(temp_v0);
+    HuMemMemoryFreePerm(temp_v0);
     return temp_s0;
 }

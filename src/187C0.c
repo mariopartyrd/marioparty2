@@ -10,4 +10,4 @@ INCLUDE_ASM(const s32, "187C0", func_80018378_18F78);
 
 INCLUDE_ASM(const s32, "187C0", func_800187F4_193F4);
 
-INCLUDE_ASM(const s32, "187C0", func_80018990_19590);
+INCLUDE_ASM(const s32, "187C0", DecodeData);

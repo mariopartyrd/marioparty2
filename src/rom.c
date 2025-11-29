@@ -22,7 +22,7 @@ s32 HuStartDma(OSIoMesg * msg, u8 pri, s32 direction, u8* src, u8* dest, u32 siz
     return osEPiStartDma(D_800FA190_FAD90, msg, direction);
 }
 
-s32 HuRomDmaRead(u8* src, u8* dest, s32 size)
+s32 dmaRead(u8* src, u8* dest, s32 size)
 {
     OSIoMesg msg;
     s32 curBlockOffset;
