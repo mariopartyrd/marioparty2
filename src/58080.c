@@ -1,20 +1,20 @@
 #include "common.h"
 #include "game/data.h"
 
+// MP3s UnkBoard8
 typedef struct {
-    u16 pad_0;
-    u8 unk_2;
-    u8 pad_3;
-    u8 unk_4;
-    u8 pad_5[0xA-5];
-    s16 unk_A;
-    s16 *unk_C;
-    u8 pad_10[0x20-0x10];
-    void *unk_20;
-    void *unk_24;
+    struct BoardPlayer* unk_00; //?
+    struct BoardPlayer* unk_04; //?
+    s16 unk_08;
+    s16 unk_0A;
+    s16* unk_0C;
+    f32* unk_10;
+    f32* unk_14;
+    s16* unk_18;
+    s16* unk_1C;
 } BoardPlayer;
 
-BoardPlayer* BoardPlayerGet(s32);
+GW_PLAYER* BoardPlayerGet(s32);
 s16 SprAnimRead(void*);
 s32 SprAnimSet(s16, s16, s16, s32);
 s32 SprPosSet(s16, s16, s16, s16);
@@ -24,8 +24,8 @@ void SprAttrReset(s16, s16, u16);
 void SprAttrSet(s16, s16, u32);
 s32 _CheckFlag(s32);
 s32 func_8005B518_5C118(s16, s32);
-s32 func_8005C6DC_5D2DC(BoardPlayer*, s16);
-s32 func_8005C78C_5D38C(BoardPlayer*, s32);
+s32 func_8005C6DC_5D2DC(GW_PLAYER*, s16);
+s32 func_8005C78C_5D38C(GW_PLAYER*, s32);
 s32 func_8005C8A0_5D4A0(s32);
 s32 func_8005C8AC_5D4AC(void*, s16);
 void* func_8005C980_5D580(void);
@@ -308,7 +308,7 @@ s32 func_8005CAD0_5D6D0(s32 arg0) {
     BoardPlayer *boardPlayer2;
     BoardPlayer* boardPlayer3;
     BoardPlayer* boardPlayer4;
-    BoardPlayer* tempBoardPlayer;
+    GW_PLAYER* tempBoardPlayer;
     Process* process;
     s32 sp3C;
     s16 var_a0_2;
@@ -329,84 +329,84 @@ s32 func_8005CAD0_5D6D0(s32 arg0) {
     for (i = 0; i < 4; i++) {
         if (i == 0) {
             mainFSData = DataRead(0xA01C8);
-            boardPlayer1->unk_C[0] = SprAnimRead(mainFSData);
+            boardPlayer1->unk_0C[0] = SprAnimRead(mainFSData);
             DataClose(mainFSData);
             mainFSData = DataRead(0xA01C9);
-            boardPlayer1->unk_C[4] = SprAnimRead(mainFSData);
+            boardPlayer1->unk_0C[4] = SprAnimRead(mainFSData);
             DataClose(mainFSData);
         }
-        SprAnimSet(boardPlayer1->unk_A, i, boardPlayer1->unk_C[0], 0);
-        SprPrioSet(boardPlayer1->unk_A, i, 8);
-        SprAttrSet(boardPlayer1->unk_A, i, 0x1000U);
-        SprPosSet(boardPlayer1->unk_A, i, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i]);
-        func_80082450_83050(boardPlayer1->unk_A, i, 0, 0, 0xFF);
-        SprAnimSet(boardPlayer1->unk_A, i + 4, boardPlayer1->unk_C[4], 0);
-        SprPrioSet(boardPlayer1->unk_A, i + 4, 8);
-        SprAttrSet(boardPlayer1->unk_A, i + 4, 0x1000U);
-        SprPosSet(boardPlayer1->unk_A, i + 4, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i]);
+        SprAnimSet(boardPlayer1->unk_0A, i, boardPlayer1->unk_0C[0], 0);
+        SprPrioSet(boardPlayer1->unk_0A, i, 8);
+        SprAttrSet(boardPlayer1->unk_0A, i, 0x1000U);
+        SprPosSet(boardPlayer1->unk_0A, i, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i]);
+        func_80082450_83050(boardPlayer1->unk_0A, i, 0, 0, 0xFF);
+        SprAnimSet(boardPlayer1->unk_0A, i + 4, boardPlayer1->unk_0C[4], 0);
+        SprPrioSet(boardPlayer1->unk_0A, i + 4, 8);
+        SprAttrSet(boardPlayer1->unk_0A, i + 4, 0x1000U);
+        SprPosSet(boardPlayer1->unk_0A, i + 4, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i]);
     }
     boardPlayer2 = func_8005E688_5F288(8, 0);
     for (i = 0; i < 4; i++) {
         tempBoardPlayer = BoardPlayerGet(i);
-        mainFSData = DataRead(D_800CC754_CD354[tempBoardPlayer->unk_4]);
-        boardPlayer2->unk_C[i] = SprAnimRead(mainFSData);
-        SprAnimSet(boardPlayer2->unk_A, i, boardPlayer2->unk_C[i], 0);
-        SprPrioSet(boardPlayer2->unk_A, i, 7);
-        SprAttrSet(boardPlayer2->unk_A, i, 0x1000U);
-        SprPosSet(boardPlayer2->unk_A, i, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] - 0x17);
+        mainFSData = DataRead(D_800CC754_CD354[tempBoardPlayer->character]);
+        boardPlayer2->unk_0C[i] = SprAnimRead(mainFSData);
+        SprAnimSet(boardPlayer2->unk_0A, i, boardPlayer2->unk_0C[i], 0);
+        SprPrioSet(boardPlayer2->unk_0A, i, 7);
+        SprAttrSet(boardPlayer2->unk_0A, i, 0x1000U);
+        SprPosSet(boardPlayer2->unk_0A, i, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] - 0x17);
         DataClose(mainFSData);
-        mainFSData = DataRead(D_800CC76C_CD36C[tempBoardPlayer->unk_4]);
-        boardPlayer2->unk_C[i + 4] = SprAnimRead(mainFSData);
-        SprAnimSet(boardPlayer2->unk_A, i + 4, boardPlayer2->unk_C[i + 4], 0);
-        SprPrioSet(boardPlayer2->unk_A, i + 4, 7);
-        SprAttrSet(boardPlayer2->unk_A, i + 4, 0x1000U);
-        SprPosSet(boardPlayer2->unk_A, i + 4, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] - 7);
+        mainFSData = DataRead(D_800CC76C_CD36C[tempBoardPlayer->character]);
+        boardPlayer2->unk_0C[i + 4] = SprAnimRead(mainFSData);
+        SprAnimSet(boardPlayer2->unk_0A, i + 4, boardPlayer2->unk_0C[i + 4], 0);
+        SprPrioSet(boardPlayer2->unk_0A, i + 4, 7);
+        SprAttrSet(boardPlayer2->unk_0A, i + 4, 0x1000U);
+        SprPosSet(boardPlayer2->unk_0A, i + 4, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] - 7);
         DataClose(mainFSData);
     }
     boardPlayer3 = func_8005E688_5F288(8, 0);
     for (i = 0; i < 8; i++) {
         mainFSData = DataRead(D_800CC784_CD384[i]);
-        boardPlayer3->unk_C[i] = SprAnimRead(mainFSData);
+        boardPlayer3->unk_0C[i] = SprAnimRead(mainFSData);
         DataClose(mainFSData);
     }
     for (i = 0; i < 4; i++) {
         if (func_8005DCA0_5E8A0(i) != 0) {
-            SprAnimSet(boardPlayer3->unk_A, i, boardPlayer3->unk_C[D_800CC7AC_CD3AC[gPlayers[i].cpu_difficulty2 * 2]], 0);
-            SprAnimSet(boardPlayer3->unk_A, (i + 4), boardPlayer3->unk_C[D_800CC7AC_CD3AC[(gPlayers[i].cpu_difficulty2 * 2) + 1]], 0);
-            SprPosSet(boardPlayer3->unk_A, i, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] + 8);
+            SprAnimSet(boardPlayer3->unk_0A, i, boardPlayer3->unk_0C[D_800CC7AC_CD3AC[gPlayers[i].cpu_difficulty2 * 2]], 0);
+            SprAnimSet(boardPlayer3->unk_0A, (i + 4), boardPlayer3->unk_0C[D_800CC7AC_CD3AC[(gPlayers[i].cpu_difficulty2 * 2) + 1]], 0);
+            SprPosSet(boardPlayer3->unk_0A, i, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] + 8);
         } else {
-            SprAnimSet(boardPlayer3->unk_A, i, boardPlayer3->unk_C[D_800CC7A4_CD3A4[gPlayers[i].port * 2]], 0);
-            SprAnimSet(boardPlayer3->unk_A, i + 4, boardPlayer3->unk_C[D_800CC7A4_CD3A4[gPlayers[i].port * 2]], 0);
-            SprPosSet(boardPlayer3->unk_A, i, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] + 0x10);
-            SprAttrSet(boardPlayer3->unk_A, i + 4, 0x8000U);
+            SprAnimSet(boardPlayer3->unk_0A, i, boardPlayer3->unk_0C[D_800CC7A4_CD3A4[gPlayers[i].port * 2]], 0);
+            SprAnimSet(boardPlayer3->unk_0A, i + 4, boardPlayer3->unk_0C[D_800CC7A4_CD3A4[gPlayers[i].port * 2]], 0);
+            SprPosSet(boardPlayer3->unk_0A, i, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] + 0x10);
+            SprAttrSet(boardPlayer3->unk_0A, i + 4, 0x8000U);
         }
-        SprPrioSet(boardPlayer3->unk_A, i, 7);
-        SprAttrSet(boardPlayer3->unk_A, i, 0x01001000U);
-        SprPrioSet(boardPlayer3->unk_A, i + 4, 7);
-        SprAttrSet(boardPlayer3->unk_A, i + 4, 0x01001000U);
-        SprPosSet(boardPlayer3->unk_A, i + 4, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] + 0x18);
+        SprPrioSet(boardPlayer3->unk_0A, i, 7);
+        SprAttrSet(boardPlayer3->unk_0A, i, 0x01001000U);
+        SprPrioSet(boardPlayer3->unk_0A, i + 4, 7);
+        SprAttrSet(boardPlayer3->unk_0A, i + 4, 0x01001000U);
+        SprPosSet(boardPlayer3->unk_0A, i + 4, D_800CC7B4_CD3B4[i], D_800CC7BC_CD3BC[i] + 0x18);
     }
     boardPlayer4 = func_8005E688_5F288(3, 0);
     mainFSData = DataRead(0xA001B);
-    boardPlayer4->unk_C[0] = SprAnimRead(mainFSData);
-    SprAnimSet(boardPlayer4->unk_A, 0, boardPlayer4->unk_C[0], 0);
-    SprAttrSet(boardPlayer4->unk_A, 0, 0x1808U);
-    SprPrioSet(boardPlayer4->unk_A, 0, 8);
-    SprScaleSet(boardPlayer4->unk_A, 0, 0.5f, 0.5f);
+    boardPlayer4->unk_0C[0] = SprAnimRead(mainFSData);
+    SprAnimSet(boardPlayer4->unk_0A, 0, boardPlayer4->unk_0C[0], 0);
+    SprAttrSet(boardPlayer4->unk_0A, 0, 0x1808U);
+    SprPrioSet(boardPlayer4->unk_0A, 0, 8);
+    SprScaleSet(boardPlayer4->unk_0A, 0, 0.5f, 0.5f);
     DataClose(mainFSData);
     mainFSData = DataRead(0xA01DF);
-    boardPlayer4->unk_C[1] = SprAnimRead(mainFSData);
-    SprAnimSet(boardPlayer4->unk_A, 1, boardPlayer4->unk_C[1], 0);
-    SprAttrSet(boardPlayer4->unk_A, 1, 0x9808U);
-    SprPrioSet(boardPlayer4->unk_A, 1, 8);
-    func_800824B4_830B4(boardPlayer4->unk_A, 1, 0xFF, 0, 0, 0x80);
+    boardPlayer4->unk_0C[1] = SprAnimRead(mainFSData);
+    SprAnimSet(boardPlayer4->unk_0A, 1, boardPlayer4->unk_0C[1], 0);
+    SprAttrSet(boardPlayer4->unk_0A, 1, 0x9808U);
+    SprPrioSet(boardPlayer4->unk_0A, 1, 8);
+    func_800824B4_830B4(boardPlayer4->unk_0A, 1, 0xFF, 0, 0, 0x80);
     DataClose(mainFSData);
     mainFSData = DataRead(0xA01DE);
-    boardPlayer4->unk_C[2] = SprAnimRead(mainFSData);
-    SprAnimSet(boardPlayer4->unk_A, 2, boardPlayer4->unk_C[2], 0);
-    SprAttrSet(boardPlayer4->unk_A, 2, 0x9808U);
-    SprPrioSet(boardPlayer4->unk_A, 2, 8);
-    func_800824B4_830B4(boardPlayer4->unk_A, 2, 0xFF, 0, 0, 0x80);
+    boardPlayer4->unk_0C[2] = SprAnimRead(mainFSData);
+    SprAnimSet(boardPlayer4->unk_0A, 2, boardPlayer4->unk_0C[2], 0);
+    SprAttrSet(boardPlayer4->unk_0A, 2, 0x9808U);
+    SprPrioSet(boardPlayer4->unk_0A, 2, 8);
+    func_800824B4_830B4(boardPlayer4->unk_0A, 2, 0xFF, 0, 0, 0x80);
     DataClose(mainFSData);
     func_8005C8AC_5D4AC(boardPlayer4, sp1E);
     func_8005C8A0_5D4A0(0);
@@ -450,7 +450,7 @@ s32 func_8005CAD0_5D6D0(s32 arg0) {
             func_8007959C_7A19C(2);
             tempBoardPlayer = BoardPlayerGet((s16)sp1E);
             func_8005C8A0_5D4A0(1);
-            var_s1 = tempBoardPlayer->unk_2;
+            var_s1 = tempBoardPlayer->cpu_difficulty2;
             i = -1;
             if (func_8005DCA0_5E8A0(sp1E)) {
                 i = 4;
@@ -490,14 +490,14 @@ s32 func_8005CAD0_5D6D0(s32 arg0) {
                 if (i >= 0) {
                     func_8005C6DC_5D2DC(tempBoardPlayer, i);
                     if (func_8005DCA0_5E8A0(sp1E) != 0) {
-                        SprAnimSet(boardPlayer3->unk_A, sp1E, boardPlayer3->unk_C[D_800CC7AC_CD3AC[gPlayers[(s16)sp1E].cpu_difficulty2 * 2]], 0);
-                        SprAnimSet(boardPlayer3->unk_A, sp1E + 4, boardPlayer3->unk_C[D_800CC7AC_CD3AC[(gPlayers[(s16)sp1E].cpu_difficulty2) * 2 + 1]], 0);
-                        SprPosSet(boardPlayer3->unk_A, sp1E, D_800CC7B4_CD3B4[(s16)sp1E], D_800CC7BC_CD3BC[(s16)sp1E] + 8);
-                        SprAttrReset(boardPlayer3->unk_A, sp1E + 4, 0x8000U);
+                        SprAnimSet(boardPlayer3->unk_0A, sp1E, boardPlayer3->unk_0C[D_800CC7AC_CD3AC[gPlayers[(s16)sp1E].cpu_difficulty2 * 2]], 0);
+                        SprAnimSet(boardPlayer3->unk_0A, sp1E + 4, boardPlayer3->unk_0C[D_800CC7AC_CD3AC[(gPlayers[(s16)sp1E].cpu_difficulty2) * 2 + 1]], 0);
+                        SprPosSet(boardPlayer3->unk_0A, sp1E, D_800CC7B4_CD3B4[(s16)sp1E], D_800CC7BC_CD3BC[(s16)sp1E] + 8);
+                        SprAttrReset(boardPlayer3->unk_0A, sp1E + 4, 0x8000U);
                     } else {
-                        SprAnimSet(boardPlayer3->unk_A, sp1E, boardPlayer3->unk_C[D_800CC7A4_CD3A4[gPlayers[(s16)sp1E].port * 2]], 0);
-                        SprPosSet(boardPlayer3->unk_A, sp1E, D_800CC7B4_CD3B4[(s16)sp1E], D_800CC7BC_CD3BC[(s16)sp1E] + 0x10);
-                        SprAttrSet(boardPlayer3->unk_A, sp1E + 4, 0x8000U);
+                        SprAnimSet(boardPlayer3->unk_0A, sp1E, boardPlayer3->unk_0C[D_800CC7A4_CD3A4[gPlayers[(s16)sp1E].port * 2]], 0);
+                        SprPosSet(boardPlayer3->unk_0A, sp1E, D_800CC7B4_CD3B4[(s16)sp1E], D_800CC7BC_CD3BC[(s16)sp1E] + 0x10);
+                        SprAttrSet(boardPlayer3->unk_0A, sp1E + 4, 0x8000U);
                     }
                 }
                 var_v0 = D_800F6098_F6C98[arg0];
@@ -571,7 +571,7 @@ INCLUDE_ASM(const s32, "58080", func_8005E1DC_5EDDC);
 INCLUDE_ASM(const s32, "58080", func_8005E228_5EE28);
 
 void func_8005E260_5EE60(s16 playerIndex) {
-    BoardPlayer* temp_v0;
+    GW_PLAYER* temp_v0;
 
     temp_v0 = BoardPlayerGet(playerIndex);
     if (temp_v0->unk_24 != 0) {
