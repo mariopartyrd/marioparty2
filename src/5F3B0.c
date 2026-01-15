@@ -32,7 +32,7 @@ typedef struct BoardStatus {
 } BoardStatus;
 
 void SprAttrReset(s16, s16, s32);                        /* extern */
-void SprAttrSet(s16, s16, s32);                          /* extern */
+void SprAttrSet(s16, s16, u32);                          /* extern */
 void SprPosSet(s16, s32, s16, s16);                      /* extern */
 void SprScaleSet(s16, s32, f32, f32);                    /* extern */
 void func_8005E7B0_5F3B0(s32);                         /* extern */
